@@ -28,7 +28,8 @@
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:typeface="sans"
-                app:chipBackgroundColor="@color/clickedblue" />
+                app:chipBackgroundColor="@color/clickedblue"
+                android:focusable="true" />
             <com.google.android.material.chip.Chip
                 android:id="@+id/btn_filter_credits"
                 android:layout_width="0dp"
@@ -40,7 +41,8 @@
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:typeface="sans"
-                app:chipBackgroundColor="@color/background_chip_state" />
+                app:chipBackgroundColor="@color/background_chip_state"
+                android:focusable="true" />
             <com.google.android.material.chip.Chip
                 android:id="@+id/btn_filter_debits"
                 android:layout_width="0dp"
@@ -52,7 +54,8 @@
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:typeface="sans"
-                app:chipBackgroundColor="@color/background_chip_state" />
+                app:chipBackgroundColor="@color/background_chip_state"
+                android:focusable="true" />
 
         </LinearLayout>
 

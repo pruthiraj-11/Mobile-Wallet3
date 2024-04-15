@@ -12,24 +12,24 @@ import java.util.List;
 
 public class NewClient {
 
-    private String fullname;
-    private String externalId;
-    private String officeId = "1";
-    private boolean active = true;
-    private String activationDate;
-    private List<Address> address = new ArrayList<>();
-    private String mobileNo;
-    private String dateFormat = "dd MMMM yyyy";
-    private String locale = "en";
-    private String submittedOnDate;
-    private int savingsProductId;
+    public String fullname;
+    public String externalId;
+    public String officeId = "1";
+    public boolean active = true;
+    public String activationDate;
+    public List<Address> address = new ArrayList<>();
+    public String mobileNo;
+    public String dateFormat = "dd MMMM yyyy";
+    public String locale = "en";
+    public String submittedOnDate;
+    public int savingsProductId;
 //    List<CustomDataTable> datatables = new ArrayList<>();
 
     public NewClient(String fullname, String externalId, String addressLine1,
             String addressLine2, String city, String postalCode, String stateProvinceId,
             String countryId, String mobileNo, int mifosSavingsProductId) {
         this.fullname = fullname;
-        this.externalId = externalId + "@mifos";
+        this.externalId = externalId + "@moneypay";
 
         address.add(new Address(addressLine1, addressLine2, city, postalCode, stateProvinceId,
                 countryId));
@@ -46,14 +46,14 @@ public class NewClient {
 
 class Address {
 
-    protected String addressTypeId = "1"; // office
-    protected boolean isActive = true;
-    protected String addressLine1;
-    protected String addressLine2;
-    protected String street;
-    protected String postalCode;
-    protected String stateProvinceId;
-    protected String countryId;
+    public String addressTypeId = "1"; // office
+    public boolean isActive = true;
+    public String addressLine1;
+    public String addressLine2;
+    public String street;
+    public String postalCode;
+    public String stateProvinceId;
+    public String countryId;
 
     public Address(String addressLine1, String addressLine2, String street, String postalCode,
             String stateProvinceId, String countryId) {
@@ -67,8 +67,8 @@ class Address {
 }
 
 class CustomDataTable {
-    private String registeredTableName = "client_info";
-    private HashMap<String, Object> data;
+    public String registeredTableName = "client_info";
+    public HashMap<String, Object> data;
 
     public CustomDataTable() {
         data = new HashMap<>();

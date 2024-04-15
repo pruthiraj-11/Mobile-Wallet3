@@ -28,6 +28,7 @@
                     android:layout_marginRight="@dimen/value_20dp"
                     android:layout_marginTop="@dimen/value_20dp"
                     android:layout_marginBottom="@dimen/value_10dp"
+                    app:boxStrokeColor="@color/black"
                     android:textColorHint="@android:color/black"
                     app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
 
@@ -57,8 +58,8 @@
                         android:layout_marginRight="@dimen/value_20dp"
                         android:layout_marginBottom="@dimen/value_10dp"
                         android:layout_toStartOf="@id/btn_scan_qr"
-                        android:layout_toLeftOf="@id/btn_scan_qr"
                         android:textColorHint="@android:color/black"
+                        app:boxStrokeColor="@color/black"
                         app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -78,10 +79,9 @@
                         android:layout_centerVertical="true"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
                         android:layout_marginEnd="@dimen/value_30dp"
-                        android:layout_marginRight="@dimen/value_30dp"
-                        android:src="@drawable/qrcode_blue_selector" />
+                        android:src="@drawable/qrcode_blue_selector"
+                        android:focusable="true" />
                 </RelativeLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -94,6 +94,7 @@
                     android:layout_marginTop="@dimen/value_10dp"
                     android:layout_marginBottom="@dimen/value_10dp"
                     android:textColorHint="@android:color/black"
+                    app:boxStrokeColor="@color/black"
                     app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -185,7 +186,7 @@
                     android:id="@+id/ll_confirm_cancel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/value_10dp"
+                    android:layout_marginEnd="@dimen/value_10dp"
                     android:layout_marginTop="@dimen/value_30dp"
                     android:gravity="right"
                     android:orientation="horizontal">
@@ -203,7 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:layout_marginLeft="@dimen/value_30dp"
+                        android:layout_marginStart="@dimen/value_30dp"
                         android:background="@color/primaryDarkBlue"
                         android:text="@string/confirm"
                         android:textColor="@android:color/white" />

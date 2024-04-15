@@ -11,9 +11,7 @@ import org.mifos.mobilewallet.mifospay.home.BaseHomeContract.ProfileView
 import org.mifos.mobilewallet.mifospay.utils.DebugUtil
 import javax.inject.Inject
 
-/**
- * Created by naman on 7/9/17.
- */
+
 class ProfilePresenter @Inject constructor(
     private val mUsecaseHandler: UseCaseHandler, private val localRepository: LocalRepository,
     private val mPreferencesHelper: PreferencesHelper

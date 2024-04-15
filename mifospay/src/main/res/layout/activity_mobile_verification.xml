@@ -15,10 +15,8 @@
             android:layout_height="wrap_content"
             android:background="@color/primaryDarkBlue">
 
-            <androidx.appcompat.widget.Toolbar
-
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar_mobile_verification"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/primaryDarkBlue"
@@ -28,8 +26,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/value_30dp"
-                android:layout_marginRight="@dimen/value_20dp"
+                android:layout_marginStart="@dimen/value_30dp"
+                android:layout_marginEnd="@dimen/value_20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -80,6 +78,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3.2"
+                app:boxStrokeColor="@color/black"
                 android:hint="@string/mobile">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -96,7 +95,7 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_gravity="right|center_vertical|center_horizontal"
-                android:layout_marginLeft="@dimen/value_10dp"
+                android:layout_marginStart="@dimen/value_10dp"
                 android:layout_weight=".9"
                 android:background="@drawable/ic_right_arrow"/>
 
@@ -115,6 +114,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:boxStrokeColor="@color/black"
                 android:hint="@string/otp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -132,7 +132,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_marginLeft="@dimen/value_10dp"
+                android:layout_marginStart="@dimen/value_10dp"
                 android:visibility="gone"/>
 
             <TextView
@@ -140,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/value_10dp"
+                android:layout_marginStart="@dimen/value_10dp"
                 android:text="@string/verifying_otp_please_wait"
                 android:visibility="gone"/>
 
@@ -153,10 +153,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="bottom"
         android:layout_marginBottom="@dimen/value_20dp"
-        android:layout_marginRight="@dimen/value_20dp"
+        android:layout_marginEnd="@dimen/value_20dp"
         android:backgroundTint="@color/primaryDarkBlue"
         android:foregroundTint="@color/primaryDarkBlue"
         android:scaleType="center"

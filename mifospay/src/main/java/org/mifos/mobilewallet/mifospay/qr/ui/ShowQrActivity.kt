@@ -64,7 +64,7 @@ class ShowQrActivity : BaseActivity(), ShowQrView {
         val layout = window.attributes
         layout.screenBrightness = 1f
         window.attributes = layout
-        btnSetAmount!!.setOnClickListener(View.OnClickListener { showSetAmountDialog(qrData) })
+        btnSetAmount!!.setOnClickListener { showSetAmountDialog(qrData) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -156,8 +156,8 @@ class ShowQrActivity : BaseActivity(), ShowQrView {
                 generateQR(qrData)
                 showToast("Reset Amount Successful")
             })
-        editTextDialog.setNegativeButton(R.string.cancel,
-            DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
+        editTextDialog.setNegativeButton(R.string.cancel
+        ) { dialog, which -> dialog.dismiss() }
         editTextDialog.show()
     }
 

@@ -110,7 +110,7 @@ class MerchantTransferActivity : BaseActivity(), MerchantTransferView {
             .height(resources.getDimension(R.dimen.user_profile_image_size).toInt())
             .endConfig().buildRound(
                 intent.getStringExtra(Constants.MERCHANT_NAME)
-                    ?.substring(0, 1), R.color.colorPrimary
+                    ?.substring(0, 1), android.R.color.white
             )
         ivMerchantImage?.setImageDrawable(drawable)
         showTransactionFetching()
@@ -192,6 +192,6 @@ class MerchantTransferActivity : BaseActivity(), MerchantTransferView {
         ivTransactionsStateIcon?.visibility = View.VISIBLE
         tvTransactionsStateTitle?.setText(title)
         tvTransactionsStateSubtitle?.setText(subtitle)
-        ivTransactionsStateIcon?.setImageDrawable(resources.getDrawable(drawable))
+        ivTransactionsStateIcon?.setImageDrawable(resources.getDrawable(drawable,null))
     }
 }

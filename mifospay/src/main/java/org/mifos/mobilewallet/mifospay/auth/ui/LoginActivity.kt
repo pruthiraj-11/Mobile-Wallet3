@@ -12,9 +12,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.mifos.mobile.passcode.utils.PassCodeConstants
 import com.mifos.mobile.passcode.utils.PasscodePreferencesHelper
 import dagger.hilt.android.AndroidEntryPoint
+import org.mifos.mobilewallet.core.domain.model.user.NewUser
 import org.mifos.mobilewallet.mifospay.R
 import org.mifos.mobilewallet.mifospay.auth.AuthContract
 import org.mifos.mobilewallet.mifospay.auth.AuthContract.LoginView
@@ -31,9 +37,6 @@ import org.mifos.mobilewallet.mifospay.utils.Toaster
 import org.mifos.mobilewallet.mifospay.utils.Utils.hideSoftKeyboard
 import javax.inject.Inject
 
-/**
- * Created by naman on 16/6/17.
- */
 @AndroidEntryPoint
 class LoginActivity : BaseActivity(), LoginView {
     @Inject
@@ -55,7 +58,7 @@ class LoginActivity : BaseActivity(), LoginView {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mPresenter.attachView(this)
-
+        window.statusBarColor= resources.getColor(R.color.colorFABContent)
         binding.loginCompose.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
@@ -103,6 +106,7 @@ class LoginActivity : BaseActivity(), LoginView {
         binding.btnLogin.setOnClickListener{onLoginClicked()}
         binding.llSignup.setOnClickListener{onSignupClicked()}
         binding.bgScreen.setOnClickListener{backgroundScreenClicked()}
+        binding.forgetPassword.setOnClickListener {  }
     }
 
     override fun setPresenter(presenter: AuthContract.LoginPresenter?) {
@@ -168,7 +172,7 @@ class LoginActivity : BaseActivity(), LoginView {
             GoogleSignInOptions.DEFAULT_SIGN_IN
         ).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
-        val signInIntent = googleSignInClient!!.getSignInIntent()
+        val signInIntent = googleSignInClient!!.signInIntent
         hideProgressDialog()
         startActivityForResult(signInIntent, 11)
     }
@@ -208,8 +212,7 @@ class LoginActivity : BaseActivity(), LoginView {
         hideProgressDialog()
         startActivity(intent)
         if (googleSignInClient != null) {
-            googleSignInClient!!.signOut()
-                .addOnCompleteListener(this, OnCompleteListener { account = null })
+            googleSignInClient!!.signOut().addOnCompleteListener(this, OnCompleteListener { account = null })
         }
     }
 }

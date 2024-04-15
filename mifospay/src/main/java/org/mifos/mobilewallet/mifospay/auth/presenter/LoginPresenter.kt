@@ -1,10 +1,16 @@
 package org.mifos.mobilewallet.mifospay.auth.presenter
 
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import org.mifos.mobilewallet.core.base.UseCase.UseCaseCallback
 import org.mifos.mobilewallet.core.base.UseCaseHandler
 import org.mifos.mobilewallet.core.data.fineract.api.FineractApiManager
 import org.mifos.mobilewallet.core.data.fineract.entity.UserWithRole
 import org.mifos.mobilewallet.core.domain.model.client.Client
+import org.mifos.mobilewallet.core.domain.model.user.NewUser
 import org.mifos.mobilewallet.core.domain.model.user.User
 import org.mifos.mobilewallet.core.domain.usecase.client.FetchClientData
 import org.mifos.mobilewallet.core.domain.usecase.user.AuthenticateUser
@@ -42,24 +48,59 @@ class LoginPresenter @Inject constructor(
         }
     }
 
-
-
     override fun loginUser(username: String?, password: String?) {
-        authenticateUserUseCase.requestValues = AuthenticateUser.RequestValues(username, password)
+        val mFirebaseDatabaseInstances: FirebaseDatabase?
+        val mFirebaseDatabase: DatabaseReference?
+        mFirebaseDatabaseInstances= FirebaseDatabase.getInstance()
+        mFirebaseDatabase= mFirebaseDatabaseInstances.getReference().child("moneypay").child("newusers")
+        mFirebaseDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    val child= dataSnapshot.children
+                    child.forEach {
+                        val users=it.getValue(NewUser::class.java)
+                        if (users?.username.equals(username) and users?.password.equals(password)) {
+                            it.key?.let { it1 -> fetchClientData(it1, users!!.username) }
+                            FirebaseDatabase.getInstance().getReference("moneypay").child("RegisteredUsers").addValueEventListener(object: ValueEventListener{
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    for (datasnapshot in snapshot.children) {
+                                        if (datasnapshot.key!! == it.key) {
+                                            datasnapshot.getValue(User::class.java)
+                                                ?.let { it1 -> fetchUserDetails(it1) }
+                                            break
+                                        }
+                                    }
+                                }
 
-        val requestValue = authenticateUserUseCase.requestValues
-        mUsecaseHandler.execute(authenticateUserUseCase, requestValue,
-            object : UseCaseCallback<AuthenticateUser.ResponseValue> {
-                override fun onSuccess(response: AuthenticateUser.ResponseValue) {
-                    createAuthenticatedService(response.user)
-                    fetchClientData()
-                    fetchUserDetails(response.user)
-                }
+                                override fun onCancelled(error: DatabaseError) {
 
-                override fun onError(message: String) {
-                    mLoginView.loginFail(message)
+                                }
+
+                            })
+                            return@forEach
+                        }
+                    }
                 }
-            })
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                mLoginView.loginFail(error.message)
+            }
+        })
+//        authenticateUserUseCase.requestValues = AuthenticateUser.RequestValues(username, password)
+//        val requestValue = authenticateUserUseCase.requestValues
+//        mUsecaseHandler.execute(authenticateUserUseCase, requestValue,
+//            object : UseCaseCallback<AuthenticateUser.ResponseValue> {
+//                override fun onSuccess(response: AuthenticateUser.ResponseValue) {
+//                    createAuthenticatedService(response.user)
+//                    fetchClientData()
+//                    fetchUserDetails(response.user)
+//                }
+//
+//                override fun onError(message: String) {
+//                    mLoginView.loginFail(message)
+//                }
+//            })
     }
 
     override fun attachView(baseView: BaseView<*>?) {
@@ -68,36 +109,72 @@ class LoginPresenter @Inject constructor(
     }
 
     private fun fetchUserDetails(user: User) {
-        mUsecaseHandler.execute(fetchUserDetailsUseCase,
-            FetchUserDetails.RequestValues(user.userId),
-            object : UseCaseCallback<FetchUserDetails.ResponseValue> {
-                override fun onSuccess(response: FetchUserDetails.ResponseValue) {
-                    saveUserDetails(user, response.userWithRole)
-                }
-
-                override fun onError(message: String) {
-                    DebugUtil.log(message)
-                }
-            })
-    }
-
-    private fun fetchClientData() {
-        mUsecaseHandler.execute(fetchClientDataUseCase, null,
-            object : UseCaseCallback<FetchClientData.ResponseValue> {
-                override fun onSuccess(response: FetchClientData.ResponseValue) {
-                    saveClientDetails(response.userDetails)
-                    if (response.userDetails.name != "") {
-                        mLoginView.loginSuccess()
+//        mUsecaseHandler.execute(fetchUserDetailsUseCase,
+//            FetchUserDetails.RequestValues(user.userId),
+//            object : UseCaseCallback<FetchUserDetails.ResponseValue> {
+//                override fun onSuccess(response: FetchUserDetails.ResponseValue) {
+//                    saveUserDetails(user, response.userWithRole)
+//                }
+//
+//                override fun onError(message: String) {
+//                    DebugUtil.log(message)
+//                }
+//            })
+        FirebaseDatabase.getInstance().getReference("moneypay").child("RegisteredUserWithRole").addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (datasnapshot in snapshot.children) {
+                        if (datasnapshot.key!! == user.userId.toString()) {
+                            datasnapshot.getValue(UserWithRole::class.java)
+                                ?.let { saveUserDetails(user, it) }
+                            break
+                        }
                     }
                 }
+            }
 
-                override fun onError(message: String) {}
-            })
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun fetchClientData(key: String, iname: String) {
+//        mUsecaseHandler.execute(fetchClientDataUseCase, null,
+//            object : UseCaseCallback<FetchClientData.ResponseValue> {
+//                override fun onSuccess(response: FetchClientData.ResponseValue) {
+//                    saveClientDetails(response.userDetails)
+//                    if (response.userDetails.name != "") {
+//                        mLoginView.loginSuccess()
+//                    }
+//                }
+//
+//                override fun onError(message: String) {}
+//            })
+        FirebaseDatabase.getInstance().getReference("moneypay").child("RegisteredClients").addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (datasnapshot in snapshot.children) {
+                        val client=datasnapshot.getValue(Client::class.java)
+                        if (client?.name.equals(iname)) {
+                            client?.let { saveClientDetails(it) }
+                            mLoginView.loginSuccess()
+                            break
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     private fun createAuthenticatedService(user: User) {
-        val authToken = Constants.BASIC +
-                user.authenticationKey
+        val authToken = Constants.BASIC + user.authenticationKey
         preferencesHelper.saveToken(authToken)
         FineractApiManager.createSelfService(preferencesHelper.token)
     }
@@ -114,8 +191,9 @@ class LoginPresenter @Inject constructor(
     }
 
     private fun saveClientDetails(client: Client) {
-        preferencesHelper.saveFullName(client.name)
+        preferencesHelper.saveFullName(client.displayName)
         preferencesHelper.clientId = client.clientId
         preferencesHelper.saveMobile(client.mobileNo)
+        preferencesHelper.clientVpa= client.externalId
     }
 }

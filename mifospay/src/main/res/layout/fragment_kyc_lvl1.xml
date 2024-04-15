@@ -71,9 +71,9 @@
 
             <EditText
                 android:id="@+id/et_mobile_number"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/value_5dp"
+                android:layout_marginStart="@dimen/value_5dp"
                 android:layout_weight="1"
                 android:hint="@string/mobile_number"
                 android:inputType="number"
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:cursorVisible="false"
-            android:focusable="false"
+            android:focusable="true"
             android:focusableInTouchMode="false"
             android:hint="@string/date_of_birth"
             android:inputType="date"

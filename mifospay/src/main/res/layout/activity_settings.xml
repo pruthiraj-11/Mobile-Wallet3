@@ -43,7 +43,8 @@
 
     </LinearLayout>
 
-    <Button
+    <TextView
+        android:gravity="center"
         android:id="@+id/btn_disable_account"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -51,6 +52,7 @@
         android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin"
         android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/value_10dp"
         android:background="@android:color/holo_red_light"
         android:text="@string/disable_account"
         android:textColor="@color/white"
@@ -58,13 +60,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <TextView
+        android:gravity="center"
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="@dimen/default_margin"
         android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/value_10dp"
         android:layout_marginEnd="@dimen/default_margin"
         android:layout_marginRight="@dimen/default_margin"
         android:background="@color/grey_900"

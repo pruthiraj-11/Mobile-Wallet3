@@ -9,7 +9,7 @@ import android.os.Parcelable;
 
 public class Account implements Parcelable {
 
-    public static final Creator<Account> CREATOR = new Creator<Account>() {
+    public static final Creator<Account> CREATOR = new Creator<>() {
         @Override
         public Account createFromParcel(Parcel source) {
             return new Account(source);
@@ -20,18 +20,28 @@ public class Account implements Parcelable {
             return new Account[size];
         }
     };
-    private String image;
-    private String name;
-    private String number;
-    private double balance;
-    private long id;
-    private long productId;
-    private Currency currency;
+    public String image;
+    public String name;
+    public String number;
+    public double balance;
+    public long id;
+    public long productId;
+    public Currency currency;
+
+    public Account(String image, String name, String number, double balance, long id, long productId, Currency currency) {
+        this.image = image;
+        this.name = name;
+        this.number = number;
+        this.balance = balance;
+        this.id = id;
+        this.productId = productId;
+        this.currency = currency;
+    }
 
     public Account() {
     }
 
-    protected Account(Parcel in) {
+    public Account(Parcel in) {
         this.image = in.readString();
         this.name = in.readString();
         this.number = in.readString();

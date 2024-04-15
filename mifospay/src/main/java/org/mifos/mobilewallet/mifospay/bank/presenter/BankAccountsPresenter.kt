@@ -27,43 +27,43 @@ class BankAccountsPresenter @Inject constructor(
         val bankAccountDetailsList: MutableList<BankAccountDetails?> = ArrayList()
         bankAccountDetailsList.add(
             BankAccountDetails(
-                "SBI", "Ankur Sharma", "New Delhi",
+                "SBI", "Jyotiranjan Barik", "Odisha",
                 mRandom.nextInt().toString() + " ", "Savings"
             )
         )
         bankAccountDetailsList.add(
             BankAccountDetails(
-                "HDFC", "Mandeep Singh ", "Uttar Pradesh",
+                "HDFC", "Jyoti Ranjan Hembram", "Odisha",
                 mRandom.nextInt().toString() + " ", "Savings"
             )
         )
         bankAccountDetailsList.add(
             BankAccountDetails(
-                "ANDHRA", "Rakesh anna ", "Telegana",
+                "ANDHRA", "Soumya Ranjan Mohanty", "Odisha",
                 mRandom.nextInt().toString() + " ", "Savings"
             )
         )
         bankAccountDetailsList.add(
             BankAccountDetails(
-                "PNB", "luv Pro ", "Gujrat",
+                "PNB", "Soumya Ranjan Harichandan", "Odisha",
                 mRandom.nextInt().toString() + " ", "Savings"
             )
         )
         bankAccountDetailsList.add(
             BankAccountDetails(
-                "HDF", "Harry potter ", "Hogwarts",
+                "HDF", "Sangram Kumar Jena", "Odisha",
                 mRandom.nextInt().toString() + " ", "Savings"
             )
         )
         bankAccountDetailsList.add(
             BankAccountDetails(
-                "GCI", "JIGME ", "JAMMU",
+                "GCI", "Biswasmruti ", "Odisha",
                 mRandom.nextInt().toString() + " ", "Savings"
             )
         )
         bankAccountDetailsList.add(
             BankAccountDetails(
-                "FCI", "NISHU BOII ", "ASSAM",
+                "FCI", "Abhinash Mallick ", "Odisha",
                 mRandom.nextInt().toString() + " ", "Savings"
             )
         )

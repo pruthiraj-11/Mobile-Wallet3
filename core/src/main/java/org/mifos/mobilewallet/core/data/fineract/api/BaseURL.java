@@ -9,7 +9,7 @@ public class BaseURL {
     public static final String PROTOCOL_HTTPS = "https://";
 
     public static final String API_ENDPOINT = "venus.mifos.community";
-    public static final String API_PATH = "/fineract-provider/api/v1/";
+    public static final String API_PATH = "/fineract-provider/api/v1/clients/";
 
     //self service url
     public static final String API_ENDPOINT_SELF = "venus.mifos.community";

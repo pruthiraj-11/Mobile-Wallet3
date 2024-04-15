@@ -1,5 +1,8 @@
 package org.mifos.mobilewallet.mifospay.editprofile.presenter
 
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.database.FirebaseDatabase
 import org.mifos.mobilewallet.core.base.UseCase.UseCaseCallback
 import org.mifos.mobilewallet.core.base.UseCaseHandler
 import org.mifos.mobilewallet.core.domain.model.client.UpdateClientEntityMobile
@@ -47,13 +50,7 @@ class EditProfilePresenter @Inject constructor(
     }
 
     private fun showUserImageOrDefault() {
-        /*
-            TODO:
 
-            We could check if user has a custom image and then fetch it from the db here
-            and show the custom image on success or default on error/if user doesn't have one
-
-         */
         mEditProfileView!!.showDefaultImageByUsername(mPreferencesHelper.fullName)
     }
 
@@ -92,46 +89,83 @@ class EditProfilePresenter @Inject constructor(
 
     override fun updateEmail(email: String?) {
         mEditProfileView!!.startProgressBar()
-        mUseCaseHandler.execute(updateUserUseCase,
-            UpdateUser.RequestValues(
-                UpdateUserEntityEmail(email),
-                mPreferencesHelper.userId.toInt()
-            ),
-            object : UseCaseCallback<UpdateUser.ResponseValue?> {
-                override fun onSuccess(response: UpdateUser.ResponseValue?) {
-                    mPreferencesHelper.saveEmail(email)
-                    showEmailIfNotEmpty()
-                    mEditProfileView!!.stopProgressBar()
-                }
-
-                override fun onError(message: String) {
-                    mEditProfileView!!.onUpdateEmailError(message)
+//        mUseCaseHandler.execute(updateUserUseCase,
+//            UpdateUser.RequestValues(
+//                UpdateUserEntityEmail(email),
+//                mPreferencesHelper.userId.toInt()
+//            ),
+//            object : UseCaseCallback<UpdateUser.ResponseValue?> {
+//                override fun onSuccess(response: UpdateUser.ResponseValue?) {
+//                    mPreferencesHelper.saveEmail(email)
+//                    showEmailIfNotEmpty()
+//                    mEditProfileView!!.stopProgressBar()
+//                }
+//
+//                override fun onError(message: String) {
+//                    mEditProfileView!!.onUpdateEmailError(message)
+//                    mEditProfileView!!.showFab()
+//                    mEditProfileView!!.stopProgressBar()
+//                }
+//            })
+        FirebaseDatabase.getInstance().getReference("moneypay").child("newusers").child(mPreferencesHelper.userId.toString())
+            .child("email").setValue(email).addOnCompleteListener{it1->
+                if (it1.isSuccessful) {
+                    FirebaseDatabase.getInstance().getReference("moneypay").child("RegisteredUserWithRole").child(
+                        mPreferencesHelper.userId.toString()
+                    ).child("email").setValue(email).addOnCompleteListener{
+                        if (it.isSuccessful) {
+                            mPreferencesHelper.saveEmail(email)
+                            showEmailIfNotEmpty()
+                            mEditProfileView!!.stopProgressBar()
+                        }
+                    }
+                } else {
+                    mEditProfileView!!.onUpdateEmailError(it1.exception?.localizedMessage)
                     mEditProfileView!!.showFab()
                     mEditProfileView!!.stopProgressBar()
                 }
-            })
+            }
     }
 
     override fun updateMobile(fullNumber: String?) {
         mEditProfileView!!.startProgressBar()
-        mUseCaseHandler.execute(updateClientUseCase,
-            UpdateClient.RequestValues(
-                UpdateClientEntityMobile(fullNumber),
-                mPreferencesHelper.clientId.toInt().toLong()
-            ),
-            object : UseCaseCallback<UpdateClient.ResponseValue?> {
-                override fun onSuccess(response: UpdateClient.ResponseValue?) {
-                    mPreferencesHelper.saveMobile(fullNumber)
-                    showMobielIfNotEmpty()
-                    mEditProfileView!!.stopProgressBar()
+//        mUseCaseHandler.execute(updateClientUseCase,
+//            UpdateClient.RequestValues(
+//                UpdateClientEntityMobile(fullNumber),
+//                mPreferencesHelper.clientId.toInt().toLong()
+//            ),
+//            object : UseCaseCallback<UpdateClient.ResponseValue?> {
+//                override fun onSuccess(response: UpdateClient.ResponseValue?) {
+//                    mPreferencesHelper.saveMobile(fullNumber)
+//                    showMobielIfNotEmpty()
+//                    mEditProfileView!!.stopProgressBar()
+//                }
+//
+//                override fun onError(message: String) {
+//                    mEditProfileView!!.onUpdateMobileError(message)
+//                    mEditProfileView!!.showFab()
+//                    mEditProfileView!!.stopProgressBar()
+//                }
+//            })
+        FirebaseDatabase.getInstance().getReference("moneypay").child("newclients").child(mPreferencesHelper.userId.toString())
+            .child(mPreferencesHelper.clientId.toString())
+            .child("mobileNo").setValue(fullNumber).addOnCompleteListener{
+            if (it.isSuccessful) {
+                FirebaseDatabase.getInstance().getReference("moneypay").child("RegisteredClients").child(
+                    mPreferencesHelper.clientId.toString())
+                    .child("mobileNo").setValue(fullNumber).addOnCompleteListener { it1 ->
+                    if (it1.isSuccessful) {
+                        mPreferencesHelper.saveMobile(fullNumber)
+                        showMobielIfNotEmpty()
+                        mEditProfileView!!.stopProgressBar()
+                    }
                 }
-
-                override fun onError(message: String) {
-                    mEditProfileView!!.onUpdateMobileError(message)
-                    mEditProfileView!!.showFab()
-                    mEditProfileView!!.stopProgressBar()
-                }
-            })
+            } else {
+                mEditProfileView!!.onUpdateMobileError(it.exception?.localizedMessage)
+                mEditProfileView!!.showFab()
+                mEditProfileView!!.stopProgressBar()
+            }
+        }
     }
 
     override fun handleProfileImageChangeRequest() {

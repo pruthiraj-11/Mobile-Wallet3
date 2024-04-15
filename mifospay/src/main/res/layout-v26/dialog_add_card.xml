@@ -13,6 +13,7 @@
         android:id="@+id/til_fName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/black"
         app:errorEnabled="true">
 
         <EditText
@@ -47,8 +48,8 @@
         android:id="@+id/til_card_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/value_10dp"
         app:boxStrokeColor="@color/black"
+        android:layout_marginTop="@dimen/value_10dp"
         app:errorEnabled="true">
 
         <EditText

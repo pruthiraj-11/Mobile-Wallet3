@@ -3,10 +3,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt.gradle)
-    alias(libs.plugins.gms)
+//    alias(libs.plugins.gms)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.kotlin.parcelize)
+//    alias(libs.plugins.kotlin.parcelize)
 }
 
 apply(from = "../config/quality/quality.gradle")
@@ -40,7 +40,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.7"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
 
     compileOptions {
@@ -68,10 +68,15 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
-    implementation("androidx.media:media:1.6.0")
+    implementation("androidx.media:media:1.7.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
-    api("com.google.android.material:material:1.0.0") // update require alot of UI changes
+    api("com.google.android.material:material:1.11.0")
+    implementation(libs.firebase.database.ktx) // update require alot of UI changes
+    implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
 
     // Compose
     val composeBom = platform(libs.androidx.compose.bom)
@@ -89,7 +94,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.ktx)
     implementation(libs.androidx.lifecycle.extensions)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
     implementation(libs.jakewharton.butterknife)
@@ -99,19 +104,19 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
 
     // Compose
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation(platform("androidx.compose:compose-bom:2024.04.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 
-    implementation("androidx.activity:activity-compose:1.8.0")
+    implementation("androidx.activity:activity-compose:1.8.2")
 
     runtimeOnly(libs.androidx.compose.runtime)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
-    implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-compiler:2.48")
+    implementation("com.google.dagger:hilt-android:2.50")
+    kapt("com.google.dagger:hilt-compiler:2.50")
 
     implementation(libs.squareup.retrofit2) {
         // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
@@ -127,21 +132,22 @@ dependencies {
     implementation(libs.reactivex.rxjava.android)
     implementation(libs.reactivex.rxjava)
 
-    implementation("io.michaelrocks:libphonenumber-android:8.11.0")
+    implementation("io.michaelrocks:libphonenumber-android:8.13.28")
 
     implementation("me.dm7.barcodescanner:zxing:1.9.13")
 
     implementation("com.mifos.mobile:mifos-passcode:0.3.0")
-    implementation("com.google.firebase:firebase-messaging:17.3.4")
-    implementation("com.google.android.gms:play-services-auth:16.0.1")
-    implementation("com.google.firebase:firebase-core:16.0.1")
-    implementation("com.google.guava:guava:27.0.1-android")
+    implementation("com.google.firebase:firebase-messaging:23.4.1")
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
+    implementation("com.google.firebase:firebase-core:21.1.1")
+    implementation("com.google.guava:guava:27.0.1-jre")
 
-    implementation("com.hbb20:ccp:2.2.0")
+    implementation("com.hbb20:ccp:2.7.3")
     implementation("com.github.MdFarhanRaja:SearchableSpinner:1.9")
     implementation("com.alimuzaffar.lib:pinentryedittext:1.3.1")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.github.yalantis:ucrop:2.2.2")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
     androidTestImplementation("androidx.test.espresso:espresso-core:3.1.0") {
         exclude(group = "com.android.support", module = "support-annotations")
@@ -151,5 +157,5 @@ dependencies {
 }
 
 kapt {
-    correctErrorTypes = true
+    correctErrorTypes= true
 }

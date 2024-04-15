@@ -21,7 +21,7 @@
             android:id="@+id/tv_empty_no_transaction_history_title"
             android:layout_marginTop="@dimen/marginItemsInSectionLarge"
             android:text="@string/error_oops"
-            android:textColor="@color/colorTextPrimary"
+            android:textColor="@color/colorAccent"
             android:textSize="@dimen/textBody1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -36,7 +36,7 @@
             android:layout_marginBottom="@dimen/marginItemsInSectionLarge"
             android:text="@string/unexpected_error_subtitle"
             android:textAlignment="center"
-            android:textColor="@color/colorTextSecondary"
+            android:textColor="@color/colorAccent"
             android:textSize="@dimen/textBody2" />
     </LinearLayout>
 </layout>

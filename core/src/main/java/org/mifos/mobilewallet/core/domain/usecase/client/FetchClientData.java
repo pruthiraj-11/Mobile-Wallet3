@@ -73,7 +73,7 @@ public class FetchClientData extends UseCase<FetchClientData.RequestValues,
                         @Override
                         public void onNext(Page<Client> client) {
                             if (client != null && client.getPageItems() != null
-                                    && client.getPageItems().size() != 0) {
+                                    && !client.getPageItems().isEmpty()) {
                                 getUseCaseCallback().onSuccess(new
                                         ResponseValue(clientDetailsMapper
                                         .transform(client.getPageItems().get(0))));

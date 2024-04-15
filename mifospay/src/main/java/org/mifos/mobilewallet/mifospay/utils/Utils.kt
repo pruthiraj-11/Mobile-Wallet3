@@ -12,8 +12,7 @@ object Utils {
     @JvmStatic
     fun hideSoftKeyboard(activity: Activity) {
         val view = activity.currentFocus
-        val inputMethodManager =
-                activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
@@ -24,7 +23,7 @@ object Utils {
     fun String.isBlank() = this.isEmpty() || indices.all { this[it].isWhitespace() }
 
     @JvmStatic
-    fun getFormattedAccountBalance(balance: Double?, currencyCode: String?, maximumFractionDigits: Int? = 0): String {
+    fun getFormattedAccountBalance(balance: Double, currencyCode: String?, maximumFractionDigits: Int? = 0): String {
         val accountBalanceFormatter = NumberFormat.getCurrencyInstance()
         accountBalanceFormatter.maximumFractionDigits = maximumFractionDigits ?: 0
         accountBalanceFormatter.currency = Currency.getInstance(currencyCode)

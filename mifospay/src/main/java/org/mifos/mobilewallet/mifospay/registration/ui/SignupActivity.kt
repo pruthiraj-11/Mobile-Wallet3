@@ -20,11 +20,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.FirebaseApp
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.mifos.mobile.passcode.utils.PassCodeConstants
 import dagger.hilt.android.AndroidEntryPoint
 import `in`.galaxyofandroid.spinerdialog.OnSpinerItemClick
 import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
 import org.json.JSONObject
+import org.mifos.mobilewallet.core.data.fineract.entity.register.RegisterPayload
+import org.mifos.mobilewallet.core.domain.model.user.NewUser
 import org.mifos.mobilewallet.mifospay.R
 import org.mifos.mobilewallet.mifospay.auth.ui.LoginActivity
 import org.mifos.mobilewallet.mifospay.base.BaseActivity
@@ -44,7 +49,7 @@ class SignupActivity : BaseActivity(), SignupView {
     @JvmField
     @Inject
     var mPresenter: SignupPresenter? = null
-    var mSignupPresenter: RegistrationContract.SignupPresenter? = null
+    private var mSignupPresenter: RegistrationContract.SignupPresenter? = null
 
     @JvmField
     @BindView(R.id.et_first_name)
@@ -122,10 +127,9 @@ class SignupActivity : BaseActivity(), SignupView {
         mPresenter!!.attachView(this)
         showColoredBackButton(Constants.BLACK_BACK_BUTTON)
         setToolbarTitle("Registration")
+        window.statusBarColor=resources.getColor(R.color.primaryDarkBlue,null)
         mifosSavingProductId = intent.getIntExtra(Constants.MIFOS_SAVINGS_PRODUCT_ID, 0)
-        if (mifosSavingProductId
-            == org.mifos.mobilewallet.core.utils.Constants.MIFOS_MERCHANT_SAVINGS_PRODUCT_ID
-        ) {
+        if (mifosSavingProductId == org.mifos.mobilewallet.core.utils.Constants.MIFOS_MERCHANT_SAVINGS_PRODUCT_ID) {
             mEtBusinessShopLayout!!.visibility = View.VISIBLE
         } else {
             mEtBusinessShopLayout!!.visibility = View.GONE
@@ -251,10 +255,6 @@ class SignupActivity : BaseActivity(), SignupView {
     }
 
     override fun onRegisterSuccess(s: String?) {
-        // registered but unable to login or user not updated with client
-        // TODO :: Consider this case
-        // 1. User not updated: when logging in update user
-        // 2. User unable to login (must be caused due to server)
         hideProgressDialog()
         showToast("Registered successfully.")
         startActivity(Intent(this@SignupActivity, LoginActivity::class.java))
@@ -295,7 +295,7 @@ class SignupActivity : BaseActivity(), SignupView {
     }
 
     private fun isEmpty(etText: EditText?): Boolean {
-        return etText!!.text.toString().trim { it <= ' ' }.length == 0
+        return etText!!.text.toString().trim { it <= ' ' }.isEmpty()
     }
 
     override fun showToast(s: String?) {

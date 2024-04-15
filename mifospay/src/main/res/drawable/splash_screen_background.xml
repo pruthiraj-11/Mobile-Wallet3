@@ -5,7 +5,7 @@
     <item
         android:width="200dp"
         android:height="200dp"
-        android:drawable="@drawable/mifospay_round_logo"
+        android:drawable="@drawable/splash_icon_pay"
         android:gravity="center" />
 
 </layer-list>

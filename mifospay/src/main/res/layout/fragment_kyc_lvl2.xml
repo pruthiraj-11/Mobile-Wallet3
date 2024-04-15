@@ -33,7 +33,7 @@
             android:id="@+id/btn_browse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/value_10dp"
+            android:layout_marginEnd="@dimen/value_10dp"
             android:background="@drawable/button_round_gray"
             android:text="@string/browse"
             android:textColor="@color/black"/>

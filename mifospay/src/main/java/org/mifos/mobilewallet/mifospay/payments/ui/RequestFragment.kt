@@ -48,9 +48,9 @@ class RequestFragment : BaseFragment(), BaseHomeContract.TransferView {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_request, container, false)
         ButterKnife.bind(this, root)
-        mPresenter!!.attachView(this)
-        mPresenter!!.fetchVpa()
-        mPresenter!!.fetchMobile()
+        mPresenter.attachView(this)
+        mPresenter.fetchVpa()
+        mPresenter.fetchMobile()
         return root
     }
 

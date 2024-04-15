@@ -215,7 +215,7 @@ class EditProfileActivity : BaseActivity(), EditProfileView {
         val drawable = TextDrawable.builder().beginConfig()
             .width(resources.getDimension(R.dimen.user_profile_image_size).toInt())
             .height(resources.getDimension(R.dimen.user_profile_image_size).toInt())
-            .endConfig().buildRound(fullName!!.substring(0, 1), R.color.colorPrimary)
+            .endConfig().buildRound(fullName!!.substring(0, 1), android.R.color.white)
         ivUserImage!!.setImageDrawable(drawable)
     }
 
@@ -349,8 +349,8 @@ class EditProfileActivity : BaseActivity(), EditProfileView {
         val options = UCrop.Options()
         options.setCompressionFormat(Bitmap.CompressFormat.JPEG)
         options.setCompressionQuality(80)
-        options.setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
-        options.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
+        options.setToolbarColor(ContextCompat.getColor(this, android.R.color.white))
+        options.setStatusBarColor(ContextCompat.getColor(this, android.R.color.white))
         options.setActiveWidgetColor(ContextCompat.getColor(this, R.color.primaryBlue))
         options.setToolbarWidgetColor(ContextCompat.getColor(this, R.color.black))
         options.setCropFrameColor(ContextCompat.getColor(this, R.color.clickedblue))
@@ -364,6 +364,8 @@ class EditProfileActivity : BaseActivity(), EditProfileView {
 
     override fun removeProfileImage() {
         // TODO: Remove image from database
+
+
     }
 
     override fun changeProfileImage() {

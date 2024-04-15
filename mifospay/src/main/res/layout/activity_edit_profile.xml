@@ -5,7 +5,7 @@
     android:focusable="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/colorPrimary"
+    android:background="#ffffff"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -51,6 +51,7 @@
                     android:layout_width="match_parent"
                     app:helperText="@string/username"
                     android:hint="@string/username"
+                    app:boxStrokeColor="@color/black"
                     android:layout_height="wrap_content" >
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -69,6 +70,7 @@
                     app:layout_anchor="@id/til_edit_profile_username"
                     app:helperText="@string/email"
                     android:hint="@string/email"
+                    app:boxStrokeColor="@color/black"
                     android:layout_height="wrap_content" >
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -86,6 +88,7 @@
                     android:layout_width="match_parent"
                     app:helperText="@string/vpa"
                     android:hint="@string/vpa"
+                    app:boxStrokeColor="@color/black"
                     android:layout_height="wrap_content" >
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -114,6 +117,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:id="@+id/til_edit_profile_mobile"
+                        app:boxStrokeColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:helperText="@string/mobile"
@@ -153,7 +157,6 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_edit_profile_save_changes"
         style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:layout_marginRight="@dimen/paddingLayout"
         android:layout_marginEnd="@dimen/paddingLayout"
         android:layout_marginBottom="@dimen/paddingLayout"
         android:layout_width="wrap_content"
@@ -162,7 +165,7 @@
         app:srcCompat="@drawable/ic_save"
         app:layout_anchorGravity="bottom|right|end"
         app:layout_anchor="@id/sv_edit_profile"
-        android:tint="@color/colorPrimary"
+        android:tint="#ffffff"
         app:backgroundTint="@color/colorAccentBlack"
         app:fabSize="normal" />
 

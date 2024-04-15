@@ -131,7 +131,7 @@ fun HomeScreen(
                                 )
                                 Spacer(modifier = Modifier.height(10.dp))
                                 val currencyEqual = if (account != null) {
-                                    "${account.currency.code}1 ${account.currency?.displayLabel}"
+                                    "${account.currency.code} ${account.currency?.displayLabel}"
                                 } else ""
                                 Text(
                                     text = currencyEqual,

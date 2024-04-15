@@ -20,14 +20,21 @@ public class Currency implements Parcelable {
             return new Currency[size];
         }
     };
-    private String code;
-    private String displaySymbol;
-    private String displayLabel;
+
+    public Currency(String code, String displaySymbol, String displayLabel) {
+        this.code = code;
+        this.displaySymbol = displaySymbol;
+        this.displayLabel = displayLabel;
+    }
+
+    public String code;
+    public String displaySymbol;
+    public String displayLabel;
 
     public Currency() {
     }
 
-    protected Currency(Parcel in) {
+    public Currency(Parcel in) {
         this.code = in.readString();
         this.displaySymbol = in.readString();
         this.displayLabel = in.readString();

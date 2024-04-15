@@ -1,6 +1,11 @@
 package org.mifos.mobilewallet.mifospay.home.presenter
 
 import androidx.lifecycle.ViewModel
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -67,29 +72,63 @@ class HomeViewModel @Inject constructor(
     }
 
     override fun fetchAccountDetails() {
-        mUsecaseHandler.execute(mFetchAccountUseCase,
-            FetchAccount.RequestValues(localRepository.clientDetails.clientId),
-            object : UseCaseCallback<FetchAccount.ResponseValue?> {
-                override fun onSuccess(response: FetchAccount.ResponseValue?) {
-                    preferencesHelper.accountId = response?.account?.id!!
+//        mUsecaseHandler.execute(mFetchAccountUseCase,
+//            FetchAccount.RequestValues(localRepository.clientDetails.clientId),
+//            object : UseCaseCallback<FetchAccount.ResponseValue?> {
+//                override fun onSuccess(response: FetchAccount.ResponseValue?) {
+//                    preferencesHelper.accountId = response?.account?.id!!
+//
+//                    _homeUIState.update { currentState ->
+//                        currentState.copy(account = response.account)
+//                    }
+//
+//                    mHomeView?.setAccountBalance(response.account)
+//                    response.account?.id?.let { transactionsHistory?.fetchTransactionsHistory(it) }
+//                    mHomeView?.hideSwipeProgress()
+//                }
+//
+//                override fun onError(message: String) {
+//                    mHomeView?.hideBottomSheetActionButton()
+//                    mHomeView?.showTransactionsError()
+//                    mHomeView?.showToast(message)
+//                    mHomeView?.hideSwipeProgress()
+//                    mHomeView?.hideTransactionLoading()
+//                }
+//            })
+        val clientId: String= localRepository.clientDetails.clientId.toString()
+        val mFirebaseDatabaseInstances: FirebaseDatabase?
+        val mFirebaseDatabase: DatabaseReference?
+        mFirebaseDatabaseInstances= FirebaseDatabase.getInstance()
+        mFirebaseDatabase= mFirebaseDatabaseInstances.getReference().child("moneypay").child("accounts")
+        mFirebaseDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (snapshot in dataSnapshot.children) {
+                        if (snapshot.key.equals(clientId)) {
+                            val account1=snapshot.getValue(Account::class.java)
+                            preferencesHelper.accountId = account1?.id!!
 
-                    _homeUIState.update { currentState ->
-                        currentState.copy(account = response.account)
+                            _homeUIState.update { currentState ->
+                                currentState.copy(account = account1)
+                            }
+
+                            mHomeView?.setAccountBalance(account1)
+                            account1.id.let { transactionsHistory?.fetchTransactionsHistory(it) }
+                            mHomeView?.hideSwipeProgress()
+                        }
                     }
-
-                    mHomeView?.setAccountBalance(response.account)
-                    response.account?.id?.let { transactionsHistory?.fetchTransactionsHistory(it) }
-                    mHomeView?.hideSwipeProgress()
                 }
+            }
 
-                override fun onError(message: String) {
-                    mHomeView?.hideBottomSheetActionButton()
-                    mHomeView?.showTransactionsError()
-                    mHomeView?.showToast(message)
-                    mHomeView?.hideSwipeProgress()
-                    mHomeView?.hideTransactionLoading()
-                }
-            })
+            override fun onCancelled(error: DatabaseError) {
+                mHomeView?.hideBottomSheetActionButton()
+                mHomeView?.showTransactionsError()
+                mHomeView?.showToast(error.details)
+                mHomeView?.hideSwipeProgress()
+                mHomeView?.hideTransactionLoading()
+            }
+
+        })
     }
 
     private fun handleTransactionsHistory(existingItemCount: Int) {
@@ -121,11 +160,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    override fun showMoreHistory(existingItemCount: Int) {
-        if (transactionList?.size == existingItemCount) {
+    override fun showMoreHistory(existingItemsCount: Int) {
+        if (transactionList?.size == existingItemsCount) {
             mHomeView?.showToast("No more History Available")
         } else {
-            handleTransactionsHistory(existingItemCount)
+            handleTransactionsHistory(existingItemsCount)
         }
     }
 

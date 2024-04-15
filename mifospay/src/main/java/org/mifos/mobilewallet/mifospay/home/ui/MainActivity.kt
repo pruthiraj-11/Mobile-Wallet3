@@ -25,9 +25,7 @@ import org.mifos.mobilewallet.mifospay.settings.ui.SettingsActivity
 import org.mifos.mobilewallet.mifospay.utils.Constants
 import javax.inject.Inject
 
-/**
- * Created by naman on 17/6/17.
- */
+
 @AndroidEntryPoint
 class MainActivity : BaseActivity(), BaseHomeView {
     @JvmField
@@ -45,6 +43,7 @@ class MainActivity : BaseActivity(), BaseHomeView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        window.statusBarColor= resources.getColor(R.color.colorFABContent,null)
         ButterKnife.bind(this)
         mPresenter?.attachView(this)
         mHomePresenter?.fetchClientDetails()
@@ -64,12 +63,7 @@ class MainActivity : BaseActivity(), BaseHomeView {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_faq -> startActivity(Intent(applicationContext, FAQActivity::class.java))
-            R.id.item_profile_setting -> startActivity(
-                Intent(
-                    applicationContext,
-                    SettingsActivity::class.java
-                )
-            )
+            R.id.item_profile_setting -> startActivity(Intent(applicationContext, SettingsActivity::class.java))
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -88,14 +82,11 @@ class MainActivity : BaseActivity(), BaseHomeView {
 //    }
 
     override fun onBackPressed() {
-        val fragment = supportFragmentManager
-            .findFragmentById(R.id.bottom_navigation_fragment_container)
+        val fragment = supportFragmentManager.findFragmentById(R.id.bottom_navigation_fragment_container)
         if (fragment is FinanceFragment && fragment.isVisible()) {
             if (fragment.vpTabLayout?.currentItem?.let {
-                    (fragment.vpTabLayout?.adapter as TabLayoutAdapter?)
-                        ?.getItem(it)
-                } is MerchantsFragment
-            ) {
+                    (fragment.vpTabLayout?.adapter as TabLayoutAdapter?)?.getItem(it)
+                } is MerchantsFragment) {
                 val merchantsFragment = (fragment.vpTabLayout?.adapter as TabLayoutAdapter?)
                     ?.getItem(fragment.vpTabLayout?.currentItem ?: 0) as MerchantsFragment
                 if (merchantsFragment.etMerchantSearch?.text.toString().isNotEmpty()) {
@@ -105,19 +96,14 @@ class MainActivity : BaseActivity(), BaseHomeView {
             }
         }
         if (fragment != null && fragment !is HomeFragment && fragment.isVisible) {
-            if (fragment is ProfileFragment &&
-                ProfileFragment.mBottomSheetBehavior?.state
-                != BottomSheetBehavior.STATE_COLLAPSED
-            ) {
+            if (fragment is ProfileFragment && ProfileFragment.mBottomSheetBehavior?.state != BottomSheetBehavior.STATE_COLLAPSED) {
                 ProfileFragment.mBottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
                 return
             }
             navigateFragment(R.id.action_home, true)
             return
         } else if (fragment != null && fragment is HomeFragment && fragment.isVisible()
-            && (HomeFragment.mBottomSheetBehavior?.state
-                    != BottomSheetBehavior.STATE_COLLAPSED)
-        ) {
+            && (HomeFragment.mBottomSheetBehavior?.state != BottomSheetBehavior.STATE_COLLAPSED)) {
             HomeFragment.mBottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
             return
         }
@@ -130,28 +116,13 @@ class MainActivity : BaseActivity(), BaseHomeView {
         } else {
             when (id) {
                 R.id.action_home -> localRepository?.clientDetails?.let {
-                    newInstance(
-                        it
-                            .clientId
-                    )
+                    newInstance(it.clientId)
                 }?.let {
-                    replaceFragment(
-                        it, false,
-                        R.id.bottom_navigation_fragment_container
-                    )
+                    replaceFragment(it, false, R.id.bottom_navigation_fragment_container)
                 }
-                R.id.action_payments -> replaceFragment(
-                    newInstance(), false,
-                    R.id.bottom_navigation_fragment_container
-                )
-                R.id.action_finance -> replaceFragment(
-                    FinanceFragment.newInstance(), false,
-                    R.id.bottom_navigation_fragment_container
-                )
-                R.id.action_profile -> replaceFragment(
-                    ProfileFragment(), false,
-                    R.id.bottom_navigation_fragment_container
-                )
+                R.id.action_payments -> replaceFragment(newInstance(), false, R.id.bottom_navigation_fragment_container)
+                R.id.action_finance -> replaceFragment(FinanceFragment.newInstance(), false, R.id.bottom_navigation_fragment_container)
+                R.id.action_profile -> replaceFragment(ProfileFragment(), false, R.id.bottom_navigation_fragment_container)
             }
         }
     }

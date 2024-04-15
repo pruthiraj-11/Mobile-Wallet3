@@ -29,13 +29,24 @@ public class UserWithRole implements Parcelable {
     private String email;
     private List<Role> selectedRoles;
 
-    protected UserWithRole(Parcel in) {
+    public UserWithRole(Parcel in) {
         id = in.readString();
         username = in.readString();
         firstname = in.readString();
         lastname = in.readString();
         email = in.readString();
         selectedRoles = in.createTypedArrayList(Role.CREATOR);
+    }
+
+    public UserWithRole(String id, String username, String firstname, String lastname, String email) {
+        this.id = id;
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+    }
+
+    public UserWithRole() {
     }
 
     @Override

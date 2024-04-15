@@ -63,8 +63,8 @@
         android:layout_marginBottom="23dp"
         android:text="@string/add_card"
         app:chipIcon="@drawable/ic_add"
-        app:chipIconTint="@color/colorPrimary"
+        app:chipIconTint="#ffffff"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="#ffffff" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

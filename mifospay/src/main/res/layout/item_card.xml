@@ -32,7 +32,6 @@
                 android:id="@+id/tv_lName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/value_10dp"
                 android:layout_marginStart="@dimen/value_10dp"
                 android:textAllCaps="true"
                 android:textColor="@color/grey_900"/>
@@ -58,8 +57,6 @@
             android:text="@string/expiry_date"
             android:textColor="@color/gray_5"
             android:theme="@style/Theme.AppCompat"/>
-
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

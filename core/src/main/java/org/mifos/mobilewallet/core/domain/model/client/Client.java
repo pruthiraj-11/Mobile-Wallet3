@@ -20,20 +20,29 @@ public class Client implements Parcelable {
             return new Client[size];
         }
     };
-    private String name;
-    private String image;
-    private String externalId;
-    private long clientId;
-    private String displayName;
-    private String mobileNo;
+    public String name;
+    public String image;
+    public String externalId;
+    public long clientId;
+    public String displayName;
+    public String mobileNo;
 
-    protected Client(Parcel in) {
+    public Client(Parcel in) {
         this.name = in.readString();
         this.image = in.readString();
         this.externalId = in.readString();
         this.clientId = in.readLong();
         this.displayName = in.readString();
         this.mobileNo = in.readString();
+    }
+
+    public Client(String name, String image, String externalId, long clientId, String displayName, String mobileNo) {
+        this.name = name;
+        this.image = image;
+        this.externalId = externalId;
+        this.clientId = clientId;
+        this.displayName = displayName;
+        this.mobileNo = mobileNo;
     }
 
     public Client() {

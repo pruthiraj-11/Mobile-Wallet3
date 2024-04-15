@@ -121,7 +121,7 @@ public class TransferFunds extends UseCase<TransferFunds.RequestValues,
                     @Override
                     public void onNext(ClientAccounts clientAccounts) {
                         List<SavingAccount> accounts = clientAccounts.getSavingsAccounts();
-                        if (accounts != null && accounts.size() != 0) {
+                        if (accounts != null && !accounts.isEmpty()) {
                             SavingAccount walletAccount = null;
                             for (SavingAccount account : accounts) {
                                 if (account.getProductId() ==
@@ -294,7 +294,7 @@ public class TransferFunds extends UseCase<TransferFunds.RequestValues,
         apiRepository.makeThirdPartyTransfer(transferPayload)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<TPTResponse>() {
+                .subscribe(new Subscriber<>() {
                     @Override
                     public void onCompleted() {
 

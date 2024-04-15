@@ -137,8 +137,7 @@ class ReadQrActivity : BaseActivity(), ReadQrView, ResultHandler {
                     scanQRImage(bMap)
                 }
             } catch (e: FileNotFoundException) {
-                Toast.makeText(applicationContext, "File not found", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(applicationContext, "File not found", Toast.LENGTH_SHORT).show()
             }
         }
     }

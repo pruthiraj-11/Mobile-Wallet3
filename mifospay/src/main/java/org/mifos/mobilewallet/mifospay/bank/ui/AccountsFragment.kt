@@ -114,7 +114,7 @@ class AccountsFragment : BaseFragment(), BankAccountsView {
     }
 
     override fun showLinkedBankAccounts(bankAccountList: List<BankAccountDetails?>?) {
-        if (bankAccountList == null || bankAccountList.size == 0) {
+        if (bankAccountList.isNullOrEmpty()) {
             mRvLinkedBankAccounts!!.visibility = View.GONE
             linkedAccountsText!!.visibility = View.GONE
             setupUi()

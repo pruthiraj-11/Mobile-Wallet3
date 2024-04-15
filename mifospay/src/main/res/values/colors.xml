@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#ffffff</color>
-    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#000000</color>
     <color name="changedBackgroundColour">#ecf0f1 </color>
     <color name="clickedblue">#00bfff</color>
@@ -33,17 +33,14 @@
     <color name="colorDivider">@color/colorBlack12</color>
 
     <color name="colorFABBackground">@color/colorAccentBlack</color>
-    <color name="colorFABContent">@color/colorPrimary</color>
+    <color name="colorFABContent">#ffffff</color>
 
     <color name="colorChangeProfileImageShapeBackground">@color/colorAccentBlack</color>
-    <color name="colorChangeProfileImageShapeText">@color/colorPrimary</color>
+    <color name="colorChangeProfileImageShapeText">#ffffff</color>
 
     <color name="colorBottomViewNotFocusedIcon">@color/colorAccentBlue50</color>
 
-
-
     <!-- OLD COLORS ARE TEMPORARY HERE UNTIL ALL OF THE LAYOUT WON'T BE REDESIGNED TO AVOID CRASHES/BUGS/CONFLICTS -->
-
 
     <color name="primaryBlue">#3F51B5</color>
     <color name="primaryDarkBlue">#303F9F</color>

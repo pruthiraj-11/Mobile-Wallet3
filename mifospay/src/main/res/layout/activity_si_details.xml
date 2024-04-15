@@ -23,7 +23,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_si_details"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/tv_si_name"
@@ -41,7 +41,6 @@
                         android:layout_marginTop="@dimen/value_40dp"
                         android:layout_marginStart="@dimen/value_20dp"
                         android:layout_marginEnd="@dimen/value_20dp"
-                        android:layout_marginLeft="@dimen/value_20dp"
                         app:layout_constraintTop_toBottomOf="@id/tv_si_name"
                         android:orientation="vertical">
 
@@ -88,6 +87,7 @@
                                 android:layout_width="@dimen/value_100dp"
                                 android:layout_height="wrap_content"
                                 android:textColorHint="@android:color/black"
+                                app:boxStrokeColor="@color/black"
                                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -136,7 +136,7 @@
                                 android:id="@+id/tv_valid_till"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/value_16sp"
-                                android:layout_marginRight="@dimen/value_20dp" />
+                                android:layout_marginEnd="@dimen/value_20dp" />
 
                             <TextView
                                 android:id="@+id/tv_edit_pick"
@@ -219,6 +219,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="@dimen/value_100dp"
                                 android:layout_height="wrap_content"
+                                app:boxStrokeColor="@color/black"
                                 android:textColorHint="@android:color/black"
                                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
 
@@ -282,7 +283,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorAccentBlack"
             app:srcCompat="@drawable/ic_edit"
-            android:tint="@color/colorPrimary"
+            android:tint="#ffffff"
             app:backgroundTint="@color/colorAccentBlack"
             app:fabSize="normal"
             android:layout_margin="@dimen/value_20dp"

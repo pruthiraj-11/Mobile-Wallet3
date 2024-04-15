@@ -12,7 +12,7 @@ import org.mifos.mobilewallet.core.data.fineract.entity.accounts.savings.Transfe
 public class Transaction implements Parcelable {
 
     public static final Creator<Transaction> CREATOR = new
-            Creator<Transaction>() {
+            Creator<>() {
                 @Override
                 public Transaction createFromParcel(Parcel source) {
                     return new Transaction(source);
@@ -23,18 +23,31 @@ public class Transaction implements Parcelable {
                     return new Transaction[size];
                 }
             };
-    String transactionId;
-    long clientId;
-    long accountId;
-    double amount;
-    String date;
-    Currency currency;
-    TransactionType transactionType;
-    long transferId;
-    TransferDetail transferDetail;
-    String receiptId;
+    public String transactionId;
+    public long clientId;
+    public long accountId;
+    public double amount;
+    public String date;
+    public Currency currency;
+    public TransactionType transactionType;
+    public long transferId;
+    public TransferDetail transferDetail;
+    public String receiptId;
 
-    protected Transaction(Parcel in) {
+    public Transaction(String transactionId, long clientId, long accountId, double amount, String date, Currency currency, TransactionType transactionType, long transferId, TransferDetail transferDetail, String receiptId) {
+        this.transactionId = transactionId;
+        this.clientId = clientId;
+        this.accountId = accountId;
+        this.amount = amount;
+        this.date = date;
+        this.currency = currency;
+        this.transactionType = transactionType;
+        this.transferId = transferId;
+        this.transferDetail = transferDetail;
+        this.receiptId = receiptId;
+    }
+
+    public Transaction(Parcel in) {
         this.transactionId = in.readString();
         this.clientId = in.readLong();
         this.accountId = in.readLong();
@@ -48,6 +61,7 @@ public class Transaction implements Parcelable {
         this.transferDetail = in.readParcelable(TransferDetail.class.getClassLoader());
         this.receiptId = in.readString();
     }
+
 
     public Transaction() {
     }

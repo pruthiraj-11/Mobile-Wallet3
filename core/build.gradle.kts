@@ -2,7 +2,9 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.kotlin.parcelize)
+//    alias(libs.plugins.kotlin.parcelize)
+//    alias(libs.plugins.ksp)
+//    alias(libs.plugins.gms)
 }
 
 apply(from = "../config/quality/quality.gradle")
@@ -32,7 +34,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.7"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
 
     kotlinOptions {
@@ -53,8 +55,9 @@ android {
 dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
 
-    implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-compiler:2.48")
+    implementation("com.google.dagger:hilt-android:2.50")
+    implementation(libs.firebase.database)
+    kapt("com.google.dagger:hilt-compiler:2.50")
 
     implementation(libs.squareup.retrofit2) {
         // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
@@ -77,5 +80,5 @@ dependencies {
 }
 
 kapt {
-    correctErrorTypes = true
+    correctErrorTypes= true
 }

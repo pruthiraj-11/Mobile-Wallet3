@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -14,7 +19,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".auth.ui.ForgotPassActivity"
+            android:exported="false" />
+
+        <provider
+            android:name="com.google.firebase.provider.FirebaseInitProvider"
+            android:authorities="${applicationId}.firebaseinitprovider"
+            tools:node="remove" />
 
         <activity android:name=".standinginstruction.ui.SIDetailsActivity" />
         <activity
@@ -24,8 +38,8 @@
         <activity android:name=".merchants.ui.MerchantTransferActivity" />
         <activity
             android:name=".SplashScreenActivity"
-            android:theme="@style/SplashScreenTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,7 +61,6 @@
             android:name=".qr.ui.ShowQrActivity"
             android:exported="true"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".payments.ui.SendActivity"
             android:exported="true"
@@ -71,9 +84,9 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".receipt.ui.ReceiptActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme"
-            android:exported="true">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -87,9 +100,9 @@
         </activity>
         <activity
             android:name=".invoice.ui.InvoiceActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme"
-            android:exported="true">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -105,7 +118,8 @@
             android:name=".history.ui.SpecificTransactionsActivity"
             android:theme="@style/AppTheme" />
 
-        <service android:name=".data.firebase.api.services.MifosPayMessagingService"
+        <service
+            android:name=".data.firebase.api.services.MifosPayMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

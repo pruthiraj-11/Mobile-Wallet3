@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/value_10dp"
-        android:paddingLeft="@dimen/value_15dp"
+        android:paddingStart="@dimen/value_15dp"
         android:textSize="@dimen/value_18sp"/>
 
 </LinearLayout>

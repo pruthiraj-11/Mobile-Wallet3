@@ -35,9 +35,6 @@ import org.mifos.mobilewallet.mifospay.utils.Toaster
 import org.mifos.mobilewallet.mifospay.utils.Utils.getFormattedAccountBalance
 import javax.inject.Inject
 
-/**
- * Created by naman on 17/8/17.
- */
 @AndroidEntryPoint
 class HomeFragment : BaseFragment(), HomeView {
 
@@ -102,10 +99,7 @@ class HomeFragment : BaseFragment(), HomeView {
 
     private lateinit var binding: FragmentHomeBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         setToolbarTitle(Constants.HOME)
         ButterKnife.bind(this, binding.root)
@@ -114,8 +108,7 @@ class HomeFragment : BaseFragment(), HomeView {
         binding.homeCompose.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnLifecycleDestroyed(viewLifecycleOwner))
             setContent {
-                HomeScreenDashboard(
-                    homeViewModel,
+                HomeScreenDashboard(homeViewModel,
                     onRequest = {
                         startActivity(Intent(this@HomeFragment.requireContext(), ShowQrActivity::class.java).apply {
                             putExtra(Constants.QR_DATA, homeViewModel.homeUIState.value.vpa)
@@ -134,11 +127,7 @@ class HomeFragment : BaseFragment(), HomeView {
         mHomePresenter?.fetchVpa()
         mTvAccountBalance?.setOnClickListener {
             if (mTvAccountBalance?.text.toString() == Constants.TAP_TO_REVEAL) {
-                homeScreenContainer?.let { it1 ->
-                    TransitionManager.beginDelayedTransition(
-                        it1
-                    )
-                }
+                homeScreenContainer?.let { it1 -> TransitionManager.beginDelayedTransition(it1) }
                 mTvAccountBalance?.text = accountBalance
                 tvHideBalance?.visibility = View.VISIBLE
             }
@@ -190,8 +179,7 @@ class HomeFragment : BaseFragment(), HomeView {
     }
 
     private fun setupRecyclerView() {
-        rvHomeBottomSheetContent?.layoutManager =
-            LinearLayoutManager(context)
+        rvHomeBottomSheetContent?.layoutManager = LinearLayoutManager(context)
         mHistoryAdapter?.setContext(activity)
         rvHomeBottomSheetContent?.adapter = mHistoryAdapter
     }
@@ -203,7 +191,7 @@ class HomeFragment : BaseFragment(), HomeView {
     override fun setAccountBalance(account: Account?) {
         this.account = account
         val currencyCode = account?.currency?.code
-        accountBalance = getFormattedAccountBalance(account?.balance, currencyCode)
+        accountBalance = account?.balance?.let { getFormattedAccountBalance(it, currencyCode) }
         hideSwipeProgress()
         homeScreenContainer?.let { TransitionManager.beginDelayedTransition(it) }
         mTvAccountBalance?.text = Constants.TAP_TO_REVEAL
@@ -258,23 +246,18 @@ class HomeFragment : BaseFragment(), HomeView {
     private fun setupEmptyStateView() {
         if (activity != null) {
             val res = resources
-            ivTransactionsStateIcon
-                ?.setImageDrawable(res.getDrawable(R.drawable.ic_empty_state))
-            tvTransactionsStateTitle?.text =
-                res.getString(R.string.empty_no_transaction_history_title)
-            tvTransactionsStateSubtitle?.text =
-                res.getString(R.string.empty_no_transaction_history_subtitle)
+            ivTransactionsStateIcon?.setImageDrawable(res.getDrawable(R.drawable.ic_empty_state))
+            tvTransactionsStateTitle?.text = res.getString(R.string.empty_no_transaction_history_title)
+            tvTransactionsStateSubtitle?.text = res.getString(R.string.empty_no_transaction_history_subtitle)
         }
     }
 
     private fun setupErrorStateView() {
         if (activity != null) {
             val res = resources
-            ivTransactionsStateIcon
-                ?.setImageDrawable(res.getDrawable(R.drawable.ic_error_state))
+            ivTransactionsStateIcon?.setImageDrawable(res.getDrawable(R.drawable.ic_error_state))
             tvTransactionsStateTitle?.text = res.getString(R.string.error_oops)
-            tvTransactionsStateSubtitle?.text = res
-                .getString(R.string.error_no_transaction_history_subtitle)
+            tvTransactionsStateSubtitle?.text = res.getString(R.string.error_no_transaction_history_subtitle)
         }
     }
 

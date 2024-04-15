@@ -16,9 +16,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import rx.Observable;
 
-/**
- * Created by ankur on 11/June/2018
- */
+
 
 public interface UserService {
 

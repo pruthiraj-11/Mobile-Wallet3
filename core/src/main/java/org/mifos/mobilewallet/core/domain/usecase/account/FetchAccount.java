@@ -52,7 +52,7 @@ public class FetchAccount extends UseCase<FetchAccount.RequestValues,
                     @Override
                     public void onNext(ClientAccounts clientAccounts) {
                         List<Account> accounts = accountMapper.transform(clientAccounts);
-                        if (accounts != null && accounts.size() != 0) {
+                        if (accounts != null && !accounts.isEmpty()) {
                             Account walletAccount = null;
                             for (Account account : accounts) {
                                 if (account.getProductId() ==

@@ -21,8 +21,7 @@
         android:textSize="@dimen/textBody1"
         android:layout_marginTop="@dimen/marginBetweenSections"
         android:layout_marginStart="@dimen/paddingLayout"
-        android:textColor="@color/colorTextPrimary"
-        android:layout_marginLeft="@dimen/paddingLayout" />
+        android:textColor="@color/colorTextPrimary" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_accounts"
         android:layout_below="@id/linked_bank_account_text"
@@ -43,8 +42,8 @@
         android:layout_marginBottom="23dp"
         android:text="@string/add_account"
         app:chipIcon="@drawable/ic_add"
-        app:chipIconTint="@color/colorPrimary"
+        app:chipIconTint="#ffffff"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="#ffffff" />
 
 </RelativeLayout>

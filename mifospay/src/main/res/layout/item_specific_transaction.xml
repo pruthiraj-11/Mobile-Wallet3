@@ -61,7 +61,7 @@
                 android:id="@+id/ll_to"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:orientation="vertical">
 
                 <ImageView
@@ -99,15 +99,15 @@
                 android:id="@+id/iv_transaction_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/value_15dp"
-                android:layout_toRightOf="@+id/iv_transaction_status"
+                android:layout_marginStart="@dimen/value_15dp"
+                android:layout_toEndOf="@+id/iv_transaction_status"
                 android:orientation="vertical">
 
                 <TextView
@@ -135,9 +135,9 @@
                 android:id="@+id/tv_transaction_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/value_10dp"
+                android:layout_marginEnd="@dimen/value_10dp"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/value_30sp"
                 android:textStyle="bold"/>

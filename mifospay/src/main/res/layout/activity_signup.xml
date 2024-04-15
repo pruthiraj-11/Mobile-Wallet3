@@ -29,8 +29,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/value_30dp"
-                    android:layout_marginRight="@dimen/value_20dp"
+                    android:layout_marginStart="@dimen/value_30dp"
+                    android:layout_marginEnd="@dimen/value_20dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -71,6 +71,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_marginBottom="@dimen/value_10dp"
                     android:layout_width="match_parent"
+                    app:boxStrokeColor="@color/black"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -88,6 +89,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_marginBottom="@dimen/value_10dp"
                     android:layout_width="match_parent"
+                    app:boxStrokeColor="@color/black"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -105,6 +107,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_marginBottom="@dimen/value_10dp"
                     android:layout_width="match_parent"
+                    app:boxStrokeColor="@color/black"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -122,6 +125,7 @@
                     android:layout_marginBottom="@dimen/value_10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/black"
                     app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -153,6 +157,7 @@
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_marginBottom="@dimen/value_10dp"
+                    app:boxStrokeColor="@color/black"
                     app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -169,6 +174,7 @@
                     android:id="@+id/etEmailLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/black"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_marginBottom="@dimen/value_10dp">
 
@@ -186,6 +192,7 @@
                     android:id="@+id/et_business_shop_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/black"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_marginBottom="@dimen/value_10dp"
                     android:visibility="gone">
@@ -204,6 +211,7 @@
                     android:id="@+id/et_address_Layout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/black"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_marginBottom="@dimen/value_10dp">
 
@@ -221,6 +229,7 @@
                     android:id="@+id/et_address_Layout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/black"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_marginBottom="@dimen/value_10dp">
 
@@ -238,6 +247,7 @@
                     android:id="@+id/et_pin_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/black"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_marginBottom="@dimen/value_10dp">
 
@@ -255,6 +265,7 @@
                     android:id="@+id/et_state_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/black"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_marginBottom="@dimen/value_10dp">
 
@@ -265,7 +276,7 @@
                         android:layout_height="wrap_content"
                         android:clickable="true"
                         android:cursorVisible="false"
-                        android:focusable="false"
+                        android:focusable="true"
                         android:hint="@string/state"
                         android:focusableInTouchMode="false"
                         android:inputType="text"

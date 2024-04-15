@@ -7,6 +7,6 @@
     <item
         android:width="100dp"
         android:height="100dp"
-        android:drawable="@drawable/splash_icon"
+        android:drawable="@drawable/money_pay_trans_logo"
         android:gravity="center" />
 </layer-list>

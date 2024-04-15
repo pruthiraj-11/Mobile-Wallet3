@@ -13,17 +13,14 @@
         android:layout_marginStart="@dimen/value_5dp"
         android:layout_marginEnd="@dimen/value_8dp"
         android:layout_marginBottom="@dimen/value_8dp"
-        android:layout_marginLeft="@dimen/value_5dp"
-        android:layout_marginTop="@dimen/value_16dp"
-        android:layout_marginRight="@dimen/value_8dp">
+        android:layout_marginTop="@dimen/value_16dp">
 
         <ImageView
             android:id="@+id/iv_click_image_picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_camera"
-            android:layout_marginStart="@dimen/value_3dp"
-            android:layout_marginLeft="@dimen/value_3dp" />
+            android:layout_marginStart="@dimen/value_3dp" />
 
         <TextView
             android:id="@+id/tv_click_image_picture"
@@ -71,7 +68,6 @@
         android:layout_marginStart="@dimen/value_8dp"
         android:layout_marginEnd="@dimen/value_8dp"
         android:layout_marginBottom="@dimen/value_8dp"
-        android:layout_marginLeft="@dimen/value_8dp"
         android:layout_marginTop="@dimen/value_16dp" >
 
         <ImageView

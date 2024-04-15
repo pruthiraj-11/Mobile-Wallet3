@@ -5,6 +5,8 @@ import org.mifos.mobilewallet.core.data.fineract.api.GenericResponse;
 import org.mifos.mobilewallet.core.data.fineract.repository.FineractRepository;
 import org.mifos.mobilewallet.core.utils.ErrorJsonMessageHelper;
 
+import java.util.Objects;
+
 import javax.inject.Inject;
 
 import retrofit2.HttpException;
@@ -40,7 +42,7 @@ public class UpdateUser extends UseCase<UpdateUser.RequestValues, UpdateUser.Res
                     public void onError(Throwable e) {
                         String message = "Error";
                         try {
-                            message = ((HttpException) e).response().errorBody().string();
+                            message = Objects.requireNonNull(Objects.requireNonNull(((HttpException) e).response()).errorBody()).string();
                             message = ErrorJsonMessageHelper.getUserMessage(message);
                         } catch (Exception e1) {
                             message = "Error";

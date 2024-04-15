@@ -6,6 +6,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/splash_icon" />
+            android:src="@drawable/money_pay_trans_logo" />
     </item>
 </layer-list>

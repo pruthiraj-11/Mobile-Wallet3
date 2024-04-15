@@ -8,12 +8,12 @@ import java.util.Date;
 
 public class NewAccount {
 
-    private int clientId;
-    private String productId;
-    private Date submittedOnDate;
-    private String accountNo;
-    private String locale;
-    private String dateFormat;
+    public int clientId;
+    public String productId;
+    public Date submittedOnDate;
+    public String accountNo;
+    public String locale;
+    public String dateFormat;
 
     public NewAccount(int clientId, String accountNo) {
         this.clientId = clientId;

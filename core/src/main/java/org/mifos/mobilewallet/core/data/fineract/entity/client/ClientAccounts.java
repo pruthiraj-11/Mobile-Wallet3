@@ -29,7 +29,7 @@ public class ClientAccounts implements Parcelable {
 
 
     protected ClientAccounts(Parcel in) {
-        this.savingsAccounts = new ArrayList<SavingAccount>();
+        this.savingsAccounts = new ArrayList<>();
     }
 
     public List<SavingAccount> getSavingsAccounts() {

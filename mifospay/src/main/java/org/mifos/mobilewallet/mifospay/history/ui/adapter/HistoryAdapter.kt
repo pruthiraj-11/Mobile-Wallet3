@@ -33,8 +33,7 @@ class HistoryAdapter @Inject constructor() : RecyclerView.Adapter<HistoryAdapter
         val transaction = transactions!![position]
         val balance = transaction.amount
         val currencyCode = transaction.currency.code
-        holder.tvTransactionAmount
-            ?.setText(getFormattedAccountBalance(balance, currencyCode))
+        holder.tvTransactionAmount?.text = getFormattedAccountBalance(balance, currencyCode)
         holder.tvTransactionDate!!.text = transaction.date
         if (balance > 0 && context != null) {
             val color = ContextCompat.getColor(context!!, R.color.colorAccentBlue)
@@ -84,9 +83,9 @@ class HistoryAdapter @Inject constructor() : RecyclerView.Adapter<HistoryAdapter
         return transactions as ArrayList<Transaction>?
     }
 
-    fun getTransaction(position: Int): Transaction {
-        return transactions!![position]
-    }
+//    fun getTransaction(position: Int): Transaction {
+//        return transactions!![position]
+//    }
 
     inner class ViewHolder(v: View?) : RecyclerView.ViewHolder(v!!) {
         @JvmField

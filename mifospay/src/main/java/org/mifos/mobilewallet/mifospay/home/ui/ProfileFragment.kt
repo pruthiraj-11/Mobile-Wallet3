@@ -151,7 +151,9 @@ class ProfileFragment : BaseFragment(), ProfileView {
             resources.getString(R.string.mobile)
     }
 
-    override fun fetchImageSuccess(responseBody: ResponseBody?) {}
+    override fun fetchImageSuccess(responseBody: ResponseBody?) {
+
+    }
     override fun showToast(message: String?) {
         Toaster.showToast(activity, message)
     }

@@ -138,16 +138,14 @@ class HistoryFragment : BaseFragment(), HistoryView {
             val res = resources
             ivTransactionsStateIcon
                 ?.setImageDrawable(res.getDrawable(drawable))
-            tvTransactionsStateTitle
-                ?.setText(res.getString(title))
-            tvTransactionsStateSubtitle
-                ?.setText(res.getString(subtitle))
+            tvTransactionsStateTitle?.text = res.getString(title)
+            tvTransactionsStateSubtitle?.text = res.getString(subtitle)
         }
     }
 
     override fun showTransactions(transactions: List<Transaction>?) {
         showRecyclerView()
-        mHistoryAdapter!!.setData(transactions)
+//        mHistoryAdapter!!.setData(transactions)
     }
 
     override fun showEmptyTransactionTypeStateView(
@@ -203,7 +201,7 @@ class HistoryFragment : BaseFragment(), HistoryView {
 
     override fun refreshTransactions(transactions: List<Transaction>?) {
         showRecyclerView()
-        mHistoryAdapter!!.setData(transactions)
+//        mHistoryAdapter!!.setData(transactions)
     }
 
     override fun setPresenter(presenter: TransactionsHistoryPresenter?) {

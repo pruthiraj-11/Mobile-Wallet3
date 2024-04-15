@@ -1,5 +1,11 @@
 package org.mifos.mobilewallet.mifospay.registration.presenter
 
+import android.content.Intent
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.FirebaseException
+import com.google.firebase.auth.PhoneAuthCredential
 import org.mifos.mobilewallet.core.base.UseCase.UseCaseCallback
 import org.mifos.mobilewallet.core.base.UseCaseHandler
 import org.mifos.mobilewallet.core.domain.usecase.client.SearchClient
@@ -7,6 +13,7 @@ import org.mifos.mobilewallet.mifospay.base.BaseView
 import org.mifos.mobilewallet.mifospay.registration.RegistrationContract
 import org.mifos.mobilewallet.mifospay.registration.RegistrationContract.MobileVerificationView
 import javax.inject.Inject
+
 
 /**
  * Created by ankur on 21/June/2018
@@ -18,6 +25,7 @@ class MobileVerificationPresenter @Inject constructor(private val mUseCaseHandle
     @JvmField
     @Inject
     var searchClientUseCase: SearchClient? = null
+
     override fun attachView(baseView: BaseView<*>?) {
         mMobileVerificationView = baseView as MobileVerificationView?
         mMobileVerificationView!!.setPresenter(this)

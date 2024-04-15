@@ -31,6 +31,18 @@ public class TransferDetail implements Parcelable {
     Client fromClient;
     @SerializedName("fromAccount")
     SavingAccount fromAccount;
+
+    public TransferDetail() {
+    }
+
+    public TransferDetail(long id, Client fromClient, SavingAccount fromAccount, Client toClient, SavingAccount toAccount) {
+        this.id = id;
+        this.fromClient = fromClient;
+        this.fromAccount = fromAccount;
+        this.toClient = toClient;
+        this.toAccount = toAccount;
+    }
+
     @SerializedName("toClient")
     Client toClient;
     @SerializedName("toAccount")

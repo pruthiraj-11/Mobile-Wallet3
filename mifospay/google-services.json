@@ -1,56 +1,111 @@
 {
   "project_info": {
-    "project_number": "650844498895",
-    "firebase_url": "https://mifos-mobile-wallet.firebaseio.com",
-    "project_id": "mifos-mobile-wallet",
-    "storage_bucket": "mifos-mobile-wallet.appspot.com"
+    "project_number": "732761681776",
+    "firebase_url": "https://sspgcek-default-rtdb.firebaseio.com",
+    "project_id": "sspgcek",
+    "storage_bucket": "sspgcek.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:650844498895:android:9be7e436ed39fe15",
+        "mobilesdk_app_id": "1:732761681776:android:ef2c067c03289a2d93a9b5",
+        "android_client_info": {
+          "package_name": "com.app.whatsappreal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "732761681776-hgfgqejrm97lff4f6knm5tcn688jh045.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDznZ7VG2iQuUWJ3XeBlwtLvseLr28VN-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "732761681776-hgfgqejrm97lff4f6knm5tcn688jh045.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732761681776:android:3fc92af548bd41ed93a9b5",
+        "android_client_info": {
+          "package_name": "com.example.sspgcek"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "732761681776-rdd4i1floa3jqnm68cc20uaknrpme3rr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sspgcek",
+            "certificate_hash": "dd9cc44cd0bdca79d00082c8d70dddbf83abebf2"
+          }
+        },
+        {
+          "client_id": "732761681776-hgfgqejrm97lff4f6knm5tcn688jh045.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDznZ7VG2iQuUWJ3XeBlwtLvseLr28VN-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "732761681776-hgfgqejrm97lff4f6knm5tcn688jh045.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732761681776:android:222f5ae479d334ec93a9b5",
         "android_client_info": {
           "package_name": "org.mifos.mobilewallet.mifospay"
         }
       },
       "oauth_client": [
         {
-          "client_id": "650844498895-eq3lvn274d8el5auf8q02n184om82eu5.apps.googleusercontent.com",
+          "client_id": "732761681776-cpepg86ppvt432o1vs3qhoi2hmrul5t1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "org.mifos.mobilewallet.mifospay",
-            "certificate_hash": "d9707290755498cb2de356116ba81da43c6e56a0"
+            "certificate_hash": "dd9cc44cd0bdca79d00082c8d70dddbf83abebf2"
           }
         },
         {
-          "client_id": "650844498895-0pj67mmhg52u1boog7tatmsab1uohl74.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "650844498895-0pj67mmhg52u1boog7tatmsab1uohl74.apps.googleusercontent.com",
+          "client_id": "732761681776-hgfgqejrm97lff4f6knm5tcn688jh045.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD-EJsFmZHKNS0ww2iX823-PBNaHR-XHRE"
+          "current_key": "AIzaSyDznZ7VG2iQuUWJ3XeBlwtLvseLr28VN-s"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "650844498895-0pj67mmhg52u1boog7tatmsab1uohl74.apps.googleusercontent.com",
+              "client_id": "732761681776-hgfgqejrm97lff4f6knm5tcn688jh045.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

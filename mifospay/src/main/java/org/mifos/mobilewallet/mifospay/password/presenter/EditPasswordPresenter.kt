@@ -1,7 +1,13 @@
 package org.mifos.mobilewallet.mifospay.password.presenter
 
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import org.mifos.mobilewallet.core.base.UseCase.UseCaseCallback
 import org.mifos.mobilewallet.core.base.UseCaseHandler
+import org.mifos.mobilewallet.core.domain.model.user.NewUser
 import org.mifos.mobilewallet.core.domain.model.user.UpdateUserEntityPassword
 import org.mifos.mobilewallet.core.domain.usecase.user.AuthenticateUser
 import org.mifos.mobilewallet.core.domain.usecase.user.UpdateUser
@@ -83,7 +89,7 @@ class EditPasswordPresenter @Inject constructor(
     }
 
     private fun isNotEmpty(str: String?): Boolean {
-        return !(str == null || str.isEmpty())
+        return !str.isNullOrEmpty()
     }
 
     private fun isNewPasswordValid(newPassword: String, newPasswordRepeat: String): Boolean {
@@ -92,35 +98,78 @@ class EditPasswordPresenter @Inject constructor(
 
     private fun updatePassword(currentPassword: String, newPassword: String) {
         // authenticate and then update
-        mUseCaseHandler.execute(authenticateUserUseCase,
-            AuthenticateUser.RequestValues(
-                mPreferencesHelper.username,
-                currentPassword
-            ),
-            object : UseCaseCallback<AuthenticateUser.ResponseValue?> {
-                override fun onSuccess(response: AuthenticateUser.ResponseValue?) {
-                    mUseCaseHandler.execute(updateUserUseCase,
-                        UpdateUser.RequestValues(
-                            UpdateUserEntityPassword(newPassword),
-                            mPreferencesHelper.userId.toInt()
-                        ),
-                        object : UseCaseCallback<UpdateUser.ResponseValue?> {
-                            override fun onSuccess(response: UpdateUser.ResponseValue?) {
-                                mEditPasswordView?.stopProgressBar()
-                                mEditPasswordView?.closeActivity()
+//        mUseCaseHandler.execute(authenticateUserUseCase,
+//            AuthenticateUser.RequestValues(
+//                mPreferencesHelper.username,
+//                currentPassword
+//            ),
+//            object : UseCaseCallback<AuthenticateUser.ResponseValue?> {
+//                override fun onSuccess(response: AuthenticateUser.ResponseValue?) {
+//                    mUseCaseHandler.execute(updateUserUseCase,
+//                        UpdateUser.RequestValues(
+//                            UpdateUserEntityPassword(newPassword),
+//                            mPreferencesHelper.userId.toInt()
+//                        ),
+//                        object : UseCaseCallback<UpdateUser.ResponseValue?> {
+//                            override fun onSuccess(response: UpdateUser.ResponseValue?) {
+//                                mEditPasswordView?.stopProgressBar()
+//                                mEditPasswordView?.closeActivity()
+//                            }
+//
+//                            override fun onError(message: String) {
+//                                mEditPasswordView?.stopProgressBar()
+//                                mEditPasswordView?.showError(message)
+//                            }
+//                        })
+//                }
+//
+//                override fun onError(message: String) {
+//                    mEditPasswordView?.stopProgressBar()
+//                    mEditPasswordView?.showError("Wrong password")
+//                }
+//            })
+        val mFirebaseDatabaseInstances: FirebaseDatabase?
+        val mFirebaseDatabase: DatabaseReference?
+        mFirebaseDatabaseInstances= FirebaseDatabase.getInstance()
+        mFirebaseDatabase=mFirebaseDatabaseInstances.getReference().child("moneypay").child("newusers")
+        mFirebaseDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    val child= dataSnapshot.children
+                    child.forEach {
+                        val users=it.getValue(NewUser::class.java)
+                        if (users?.username.equals(mPreferencesHelper.username) and users?.password.equals(currentPassword)) {
+                            FirebaseDatabase.getInstance().getReference("moneypay").child("newusers").child(mPreferencesHelper.userId.toString())
+                                .child("password").setValue(newPassword).addOnCompleteListener { it1 ->
+                                if (it1.isSuccessful) {
+                                    FirebaseDatabase.getInstance().getReference("moneypay")
+                                        .child("newusers")
+                                        .child(mPreferencesHelper.userId.toString())
+                                        .child("repeatPassword").setValue(newPassword)
+                                        .addOnCompleteListener { it2 ->
+                                            if (it2.isSuccessful) {
+                                                mEditPasswordView?.stopProgressBar()
+                                                mEditPasswordView?.closeActivity()
+                                            }
+                                        }
+                                } else {
+                                    mEditPasswordView?.stopProgressBar()
+                                    mEditPasswordView?.showError(it1.exception?.message)
+                                }
                             }
-
-                            override fun onError(message: String) {
-                                mEditPasswordView?.stopProgressBar()
-                                mEditPasswordView?.showError(message)
-                            }
-                        })
+                            return@forEach
+                        } else if (users?.username.equals(mPreferencesHelper.username) and !users?.password.equals(currentPassword)){
+                            mEditPasswordView?.stopProgressBar()
+                            mEditPasswordView?.showError("Wrong password")
+                        }
+                    }
                 }
+            }
 
-                override fun onError(message: String) {
-                    mEditPasswordView?.stopProgressBar()
-                    mEditPasswordView?.showError("Wrong password")
-                }
-            })
+            override fun onCancelled(error: DatabaseError) {
+                mEditPasswordView?.stopProgressBar()
+                mEditPasswordView?.showError(error.message)
+            }
+        })
     }
 }

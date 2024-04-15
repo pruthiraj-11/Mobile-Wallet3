@@ -1,9 +1,14 @@
 package org.mifos.mobilewallet.mifospay.history.presenter
 
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import org.mifos.mobilewallet.core.base.TaskLooper
 import org.mifos.mobilewallet.core.base.UseCase.UseCaseCallback
 import org.mifos.mobilewallet.core.base.UseCaseFactory
 import org.mifos.mobilewallet.core.base.UseCaseHandler
+import org.mifos.mobilewallet.core.data.fineract.entity.UserWithRole
 import org.mifos.mobilewallet.core.domain.model.Account
 import org.mifos.mobilewallet.core.domain.model.Transaction
 import org.mifos.mobilewallet.core.domain.model.TransactionType
@@ -18,6 +23,7 @@ import org.mifos.mobilewallet.mifospay.history.HistoryContract.TransactionsHisto
 import org.mifos.mobilewallet.mifospay.history.TransactionsHistory
 import java.util.Locale
 import javax.inject.Inject
+import kotlin.random.Random
 
 class HistoryPresenter @Inject constructor(
     private val mUseCaseHandler: UseCaseHandler,
@@ -52,25 +58,48 @@ class HistoryPresenter @Inject constructor(
     }
 
     override fun fetchTransactions() {
-        mHistoryView!!.showHistoryFetchingProgress()
-        mUseCaseHandler.execute(mFetchAccountUseCase,
-            FetchAccount.RequestValues(mLocalRepository.clientDetails.clientId),
-            object : UseCaseCallback<FetchAccount.ResponseValue?> {
-                override fun onSuccess(response: FetchAccount.ResponseValue?) {
-                    mAccount = response?.account
-                    response?.account?.id?.let {
-                        mTransactionsHistory
-                            ?.fetchTransactionsHistory(it)
+//        mHistoryView!!.showHistoryFetchingProgress()
+//        mUseCaseHandler.execute(mFetchAccountUseCase,
+//            FetchAccount.RequestValues(mLocalRepository.clientDetails.clientId),
+//            object : UseCaseCallback<FetchAccount.ResponseValue?> {
+//                override fun onSuccess(response: FetchAccount.ResponseValue?) {
+//                    mAccount = response?.account
+//                    response?.account?.id?.let {
+//                        mTransactionsHistory
+//                            ?.fetchTransactionsHistory(it)
+//                    }
+//                }
+//
+//                override fun onError(message: String) {
+//                    showErrorStateView()
+//                }
+//            })
+        FirebaseDatabase.getInstance().getReference("moneypay").child("accounts")
+            .addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (datasnapshot in snapshot.children) {
+                        if (datasnapshot.key!! == mLocalRepository.clientDetails.clientId.toString()) {
+                            val account=datasnapshot.getValue(Account::class.java)
+                            account?.let { mTransactionsHistory?.fetchTransactionsHistory(it.id) }
+                            break
+                        }
                     }
                 }
+            }
 
-                override fun onError(message: String) {
-                    showErrorStateView()
-                }
-            })
+            override fun onCancelled(error: DatabaseError) {
+                showErrorStateView()
+            }
+
+        })
     }
 
     override fun filterTransactionType(type: TransactionType?) {
+        if (allTransactions?.isEmpty() == true) {
+            showEmptyTransactionTypeStateView(type.toString().lowercase(Locale.getDefault()))
+            return
+        }
         val filterTransactions: MutableList<Transaction> = ArrayList()
         for (transaction in allTransactions!!) {
             if (transaction.transactionType == type) {
@@ -116,7 +145,7 @@ class HistoryPresenter @Inject constructor(
         if (transactions == null) {
             showErrorStateView()
         } else {
-            val transactionsAmount = transactions.size
+            val transactionsAmount = transactions.size  
             if (transactionsAmount > 0) {
                 allTransactions = transactions
                 mHistoryView!!.showTransactions(transactions)

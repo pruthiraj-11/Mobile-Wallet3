@@ -23,6 +23,12 @@ public class User implements Parcelable {
     private String username;
     private String authenticationKey;
 
+    public User(long userId, String username, String authenticationKey) {
+        this.userId = userId;
+        this.username = username;
+        this.authenticationKey = authenticationKey;
+    }
+
     public User() {
     }
 

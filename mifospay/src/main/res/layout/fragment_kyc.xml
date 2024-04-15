@@ -60,8 +60,8 @@
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="@dimen/value_100dp"
                 android:layout_height="@dimen/value_50dp"
-                android:layout_marginLeft="@dimen/value_20dp"
-                android:layout_marginRight="@dimen/value_50dp"
+                android:layout_marginStart="@dimen/value_20dp"
+                android:layout_marginEnd="@dimen/value_50dp"
                 android:text="@string/level_2" />
 
             <ImageView
@@ -74,7 +74,7 @@
                 android:id="@+id/completedtx2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/value_20dp" />
+                android:layout_marginStart="@dimen/value_20dp" />
 
         </LinearLayout>
 
@@ -89,8 +89,8 @@
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="@dimen/value_100dp"
                 android:layout_height="@dimen/value_50dp"
-                android:layout_marginLeft="@dimen/value_20dp"
-                android:layout_marginRight="@dimen/value_50dp"
+                android:layout_marginStart="@dimen/value_20dp"
+                android:layout_marginEnd="@dimen/value_50dp"
                 android:text="@string/level_3" />
 
             <ImageView
@@ -103,7 +103,7 @@
                 android:id="@+id/completedtx3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/value_20dp" />
+                android:layout_marginStart="@dimen/value_20dp" />
 
         </LinearLayout>
     </FrameLayout>

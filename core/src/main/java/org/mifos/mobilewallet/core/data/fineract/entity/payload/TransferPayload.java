@@ -3,6 +3,8 @@ package org.mifos.mobilewallet.core.data.fineract.entity.payload;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -194,6 +196,7 @@ public class TransferPayload implements Parcelable {
         dest.writeString(this.locale);
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "TransferPayload{" +

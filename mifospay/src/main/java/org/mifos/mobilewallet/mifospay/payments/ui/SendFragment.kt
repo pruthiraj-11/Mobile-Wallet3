@@ -44,7 +44,7 @@ class SendFragment : BaseFragment(), BaseHomeContract.TransferView {
 
     private val mPresenter: TransferPresenter by viewModels()
 
-    var mTransferPresenter: BaseHomeContract.TransferPresenter? = null
+    private var mTransferPresenter: BaseHomeContract.TransferPresenter? = null
 
     @JvmField
     @BindView(R.id.rl_send_container)
@@ -142,13 +142,9 @@ class SendFragment : BaseFragment(), BaseHomeContract.TransferView {
     fun transferClicked() {
         val externalId = etVpa!!.text.toString().trim { it <= ' ' }
         val eamount = etAmount!!.text.toString().trim { it <= ' ' }
-        val mobileNumber = mEtMobileNumber!!.text
-            .toString().trim { it <= ' ' }.replace("\\s+".toRegex(), "")
+        val mobileNumber = mEtMobileNumber!!.text.toString().trim { it <= ' ' }.replace("\\s+".toRegex(), "")
         if (eamount == "" || mBtnVpa!!.isSelected && externalId == "" || mBtnMobile!!.isSelected && mobileNumber == "") {
-            Toast.makeText(
-                activity,
-                Constants.PLEASE_ENTER_ALL_THE_FIELDS, Toast.LENGTH_SHORT
-            ).show()
+            Toast.makeText(activity, Constants.PLEASE_ENTER_ALL_THE_FIELDS, Toast.LENGTH_SHORT).show()
         } else {
             val amount = eamount.toDouble()
             if (amount <= 0) {
@@ -169,17 +165,9 @@ class SendFragment : BaseFragment(), BaseHomeContract.TransferView {
 
     @OnClick(R.id.btn_scan_qr)
     fun scanQrClicked() {
-        if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(
-                requireActivity(),
-                Manifest.permission.CAMERA
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-
-            // Permission is not granted
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(arrayOf(Manifest.permission.CAMERA), REQUEST_CAMERA)
         } else {
-
-            // Permission has already been granted
             val i = Intent(activity, ReadQrActivity::class.java)
             startActivityForResult(i, SCAN_QR_REQUEST_CODE)
         }
@@ -195,24 +183,10 @@ class SendFragment : BaseFragment(), BaseHomeContract.TransferView {
 
     @OnClick(R.id.btn_search_contact)
     fun searchContactClicked() {
-        if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(
-                requireActivity(),
-                Manifest.permission.READ_CONTACTS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-
-            // Permission is not granted
-            requestPermissions(
-                arrayOf(Manifest.permission.READ_CONTACTS),
-                REQUEST_READ_CONTACTS
-            )
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS), REQUEST_READ_CONTACTS)
         } else {
-
-            // Permission has already been granted
-            val intent = Intent(
-                Intent.ACTION_PICK,
-                ContactsContract.CommonDataKinds.Phone.CONTENT_URI
-            )
+            val intent = Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI)
             startActivityForResult(intent, PICK_CONTACT)
         }
     }
@@ -260,6 +234,7 @@ class SendFragment : BaseFragment(), BaseHomeContract.TransferView {
                 phoneNo = cursor.getString(phoneIndex)
                 name = cursor.getString(nameIndex)
                 mEtMobileNumber!!.setText(phoneNo)
+                cursor.close()
             } catch (e: Exception) {
                 showToast(Constants.ERROR_CHOOSING_CONTACT)
             }
@@ -272,15 +247,10 @@ class SendFragment : BaseFragment(), BaseHomeContract.TransferView {
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
             REQUEST_CAMERA -> {
-
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.size > 0
+                if (grantResults.isNotEmpty()
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ) {
                     // permission was granted, yay! Do the
@@ -296,9 +266,8 @@ class SendFragment : BaseFragment(), BaseHomeContract.TransferView {
             }
 
             REQUEST_READ_CONTACTS -> {
-
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.size > 0
+                if (grantResults.isNotEmpty()
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ) {
                     // permission was granted, yay! Do the

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.mifos.mobilewallet.core.base.UseCase.UseCaseCallback
@@ -100,7 +101,7 @@ class KYCLevel2Presenter @Inject constructor(
     private fun getRequestFileBody(file: File): MultipartBody.Part {
         // create RequestBody instance from file
         val requestFile = RequestBody.create(
-            MediaType.parse(Constants.MULTIPART_FORM_DATA),
+            Constants.MULTIPART_FORM_DATA.toMediaTypeOrNull(),
             file
         )
 

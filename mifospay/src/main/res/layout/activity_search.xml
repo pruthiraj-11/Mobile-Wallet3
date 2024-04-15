@@ -19,7 +19,7 @@
                 android:layout_marginLeft="@dimen/value_10dp"
                 android:layout_marginRight="@dimen/value_10dp"
                 android:background="@android:color/transparent"
-                android:drawableLeft="@drawable/ic_search"
+                android:drawableStart="@drawable/ic_search"
                 android:drawablePadding="@dimen/value_10dp"
                 android:hint="@string/enter_name_or_vpa"
                 android:inputType="text"

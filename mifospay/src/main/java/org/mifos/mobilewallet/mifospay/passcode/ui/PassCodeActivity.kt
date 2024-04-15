@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import android.view.View
 import android.widget.Toast
+import androidx.compose.ui.graphics.Color
 import butterknife.ButterKnife
 import com.mifos.mobile.passcode.MifosPassCodeActivity
 import com.mifos.mobile.passcode.utils.EncryptionUtil
@@ -22,9 +23,6 @@ import org.mifos.mobilewallet.mifospay.receipt.ui.ReceiptActivity
 import org.mifos.mobilewallet.mifospay.utils.Constants
 import javax.inject.Inject
 
-/**
- * Created by ankur on 15/May/2018
- */
 
 @AndroidEntryPoint
 class PassCodeActivity : MifosPassCodeActivity(), PassCodeView {
@@ -40,7 +38,7 @@ class PassCodeActivity : MifosPassCodeActivity(), PassCodeView {
         super.onCreate(savedInstanceState)
 
         // can't call getActivityComponent b/c PassCodeActivity class does not extend BaseActivity
-
+        window.statusBarColor= resources.getColor(R.color.colorFABContent)
         isInitialScreen = intent.getBooleanExtra(
             PassCodeConstants.PASSCODE_INITIAL_LOGIN,
             false

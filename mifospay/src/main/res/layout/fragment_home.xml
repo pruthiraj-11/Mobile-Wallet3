@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -23,14 +24,14 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--Remove later after full implementation of compose UI-->
-        <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/cc_home_screen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
+            android:background="#000000"
             android:visibility="gone"
-            tools:context="org.mifos.mobilewallet.mifospay.home.ui.MainActivity">
+            tools:context="org.mifos.mobilewallet.mifospay.home.ui.MainActivity"
+            tools:visibility="visible">
 
             <TextView
                 android:id="@+id/tv_account_balance"
@@ -40,7 +41,7 @@
                 android:layout_marginTop="@dimen/marginBetweenLogoAndLoginInput"
                 android:gravity="center"
                 android:text="@string/fetching"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/white"
                 android:textSize="@dimen/textH4"
                 app:fontFamily="@font/montserrat" />
 
@@ -52,7 +53,7 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/balance_hint"
                 android:textAllCaps="true"
-                android:textColor="@color/colorBlack54"
+                android:textColor="@color/white"
                 android:textSize="@dimen/textOverline"
                 app:layout_anchor="@id/tv_account_balance"
                 app:layout_anchorGravity="bottom|center_horizontal" />
@@ -65,11 +66,12 @@
                 android:layout_marginTop="40dp"
                 android:fontFamily="sans-serf-black"
                 android:text="@string/hide_balance"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:visibility="gone"
                 app:layout_anchor="@id/textView8"
-                app:layout_anchorGravity="bottom|center_horizontal" />
+                app:layout_anchorGravity="bottom|center_horizontal"
+                tools:visibility="gone" />
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/nsv_home_bottom_sheet_dialog"
@@ -100,7 +102,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/marginItemsInSectionSmall"
                         android:text="@string/transaction_history"
-                        android:textColor="@color/colorTextPrimary"
+                        android:textColor="@color/colorAccent"
                         android:textSize="@dimen/textBody1" />
 
                     <ProgressBar
@@ -128,7 +130,8 @@
                         android:layout_marginTop="24dp"
                         android:layout_weight="1"
                         android:scrollbars="vertical"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        tools:visibility="visible" />
 
                     <include
                         android:id="@+id/inc_empty_transactions_state_view"
@@ -138,7 +141,8 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/marginItemsInSectionLarge"
                         android:layout_weight="1"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        tools:visibility="gone" />
 
                     <Button
                         android:id="@+id/btn_home_bottom_sheet_action"
@@ -149,7 +153,8 @@
                         android:layout_marginTop="@dimen/marginItemsInSectionLarge"
                         android:layout_marginBottom="@dimen/marginItemsInSectionSmall"
                         android:text="@string/show_more"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        tools:visibility="gone" />
 
                 </LinearLayout>
 
