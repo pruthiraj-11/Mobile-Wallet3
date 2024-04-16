@@ -6,7 +6,7 @@ plugins {
 //    alias(libs.plugins.gms)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.kapt)
-//    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 apply(from = "../config/quality/quality.gradle")
